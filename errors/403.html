@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>403 Access Forbidden - Standard Breeze UI</title>
+    <meta name="description" content="Production-ready 403 Access Forbidden template styled with pure CSS using universal app.css design tokens.">
+    <!-- Reference to universal design system -->
+    <link rel="stylesheet" href="../app.css">
+    <script src="../app.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body class="bg-surface-container-low min-h-screen flex flex-col items-center justify-center p-4 selection:bg-secondary/10 selection:text-secondary font-body text-on-surface">
+
+    <!-- Top Bar Navigation for Standalone Prototype -->
+    <div class="absolute top-6 left-6 z-10">
+        <a href="code.html" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface shadow-sm border border-outline-variant/30 text-sm font-medium text-on-surface-variant hover:text-primary hover:border-primary/40 transition-all">
+            <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+            <span>All Error States</span>
+        </a>
+    </div>
+
+    <!-- 403 Error Main Card Container -->
+    <main class="w-full max-w-xl bg-surface-container-lowest rounded-2xl shadow-xl border border-outline-variant/30 p-8 md:p-12 text-center relative overflow-hidden">
+        
+        <!-- Decorative Background Glow -->
+        <div class="absolute -top-24 -right-24 w-48 h-48 bg-secondary/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-secondary/5 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Status Badge -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-50 border border-purple-200 text-purple-700 text-xs font-semibold uppercase tracking-wider mb-8">
+            <span class="w-2 h-2 rounded-full bg-secondary"></span>
+            <span>HTTP 403 &bull; Permission Denied</span>
+        </div>
+
+        <!-- Hero Icon -->
+        <div class="mx-auto w-24 h-24 rounded-2xl bg-purple-50 border-2 border-purple-100 flex items-center justify-center mb-6 shadow-sm text-secondary transform hover:scale-105 transition-transform duration-300">
+            <span class="material-symbols-outlined text-[52px]" style="font-variation-settings: 'FILL' 1, 'wght' 500;">lock_person</span>
+        </div>
+
+        <!-- Error Headline -->
+        <h1 class="text-3xl md:text-4xl font-headline font-black text-on-surface mb-3 tracking-tight">
+            Access Forbidden
+        </h1>
+
+        <!-- Error Description -->
+        <p class="text-on-surface-variant text-base md:text-lg max-w-md mx-auto mb-8 leading-relaxed">
+            You do not have the required permissions or security clearance to view this directory or module with your current account.
+        </p>
+
+        <!-- Current Account Session Widget -->
+        <div class="bg-surface-container-low border border-outline-variant/40 rounded-xl p-4 mb-8 max-w-md mx-auto text-left flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold text-sm">
+                    JD
+                </div>
+                <div>
+                    <div class="text-sm font-semibold text-on-surface">John Doe</div>
+                    <div class="text-xs text-on-surface-variant">Role: <span class="font-medium text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded">Standard User</span></div>
+                </div>
+            </div>
+            <button onclick="alert('Switch account dialog triggered. Redirecting to login session.'); window.location.href='../authentication_card_component_standard/code.html';" class="px-3 py-1.5 text-xs font-medium text-primary bg-primary-container/10 hover:bg-primary-container/20 rounded-lg transition-colors border border-primary/20">
+                Switch User
+            </button>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <button onclick="alert('Access request sent to System Administrator for review.');" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-on-primary font-medium shadow-md hover:bg-primary-hover active:scale-[0.98] transition-all duration-200">
+                <span class="material-symbols-outlined text-[20px]">admin_panel_settings</span>
+                <span>Request Access</span>
+            </button>
+            <a href="../index.html" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-surface border border-outline-variant text-on-surface font-medium hover:bg-surface-container-low active:scale-[0.98] transition-all duration-200">
+                <span class="material-symbols-outlined text-[20px]">home</span>
+                <span>Return to Hub</span>
+            </a>
+        </div>
+
+        <!-- Footer Help Text -->
+        <div class="mt-8 pt-6 border-t border-outline-variant/20 text-xs text-on-surface-variant/80">
+            Need immediate clearance? Contact your workspace administrator or check <a href="#" class="text-primary hover:underline font-medium">Role Based Access Policies</a>.
+        </div>
+
+    </main>
+
+    <!-- Page Footer -->
+    <footer class="mt-8 text-center text-xs text-on-surface-variant/70">
+        &copy; 2026 Breeze UI Architecture &bull; Universal app.css Styled Error Prototype
+    </footer>
+</body>
+</html>

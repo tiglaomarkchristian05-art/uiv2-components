@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>419 Page Expired - Standard Breeze UI</title>
+    <meta name="description" content="Production-ready 419 Page Expired (CSRF Token Mismatch) template styled with pure CSS using universal app.css design tokens.">
+    <!-- Reference to universal design system -->
+    <link rel="stylesheet" href="../app.css">
+    <script src="../app.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body class="bg-surface-container-low min-h-screen flex flex-col items-center justify-center p-4 selection:bg-blue-600/10 selection:text-blue-600 font-body text-on-surface">
+
+    <!-- Top Bar Navigation for Standalone Prototype -->
+    <div class="absolute top-6 left-6 z-10">
+        <a href="code.html" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface shadow-sm border border-outline-variant/30 text-sm font-medium text-on-surface-variant hover:text-primary hover:border-primary/40 transition-all">
+            <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+            <span>All Error States</span>
+        </a>
+    </div>
+
+    <!-- 419 Error Main Card Container -->
+    <main class="w-full max-w-xl bg-surface-container-lowest rounded-2xl shadow-xl border border-outline-variant/30 p-8 md:p-12 text-center relative overflow-hidden">
+        
+        <!-- Decorative Background Glow -->
+        <div class="absolute -top-24 -right-24 w-48 h-48 bg-blue-100 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-blue-50 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Status Badge -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-800 text-xs font-semibold uppercase tracking-wider mb-8">
+            <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+            <span>HTTP 419 &bull; Session Expired / CSRF</span>
+        </div>
+
+        <!-- Hero Icon -->
+        <div class="mx-auto w-24 h-24 rounded-2xl bg-blue-50 border-2 border-blue-100 flex items-center justify-center mb-6 shadow-sm text-blue-600 transform hover:rotate-12 transition-transform duration-300">
+            <span class="material-symbols-outlined text-[52px]" style="font-variation-settings: 'FILL' 1, 'wght' 500;">history_toggle_off</span>
+        </div>
+
+        <!-- Error Headline -->
+        <h1 class="text-3xl md:text-4xl font-headline font-black text-on-surface mb-3 tracking-tight">
+            Page Has Expired
+        </h1>
+
+        <!-- Error Description -->
+        <p class="text-on-surface-variant text-base md:text-lg max-w-md mx-auto mb-8 leading-relaxed">
+            Your security session expired due to prolonged inactivity or a CSRF token mismatch. We do this to keep your account safe.
+        </p>
+
+        <!-- Session Recovery Box -->
+        <div class="bg-surface-container-low border border-outline-variant/40 rounded-xl p-4 mb-8 max-w-md mx-auto text-left flex items-start gap-3.5">
+            <span class="material-symbols-outlined text-blue-600 text-xl mt-0.5">verified_user</span>
+            <div class="text-xs text-on-surface-variant space-y-1">
+                <p class="font-semibold text-on-surface">Automatic CSRF Protection</p>
+                <p>Any unsubmitted form data on the previous page has been preserved locally in your browser session. Refreshing will restore your secure token.</p>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <button onclick="window.location.reload();" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-on-primary font-medium shadow-md hover:bg-primary-hover active:scale-[0.98] transition-all duration-200">
+                <span class="material-symbols-outlined text-[20px]">refresh</span>
+                <span>Refresh Session</span>
+            </button>
+            <a href="../authentication_card_component_standard/code.html" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-surface border border-outline-variant text-on-surface font-medium hover:bg-surface-container-low active:scale-[0.98] transition-all duration-200">
+                <span class="material-symbols-outlined text-[20px]">login</span>
+                <span>Log In Again</span>
+            </a>
+        </div>
+
+        <!-- Footer Help Text -->
+        <div class="mt-8 pt-6 border-t border-outline-variant/20 text-xs text-on-surface-variant/80">
+            Learn more about <a href="#" class="text-primary hover:underline font-medium">Web Application Security &amp; CSRF Tokens</a>.
+        </div>
+
+    </main>
+
+    <!-- Page Footer -->
+    <footer class="mt-8 text-center text-xs text-on-surface-variant/70">
+        &copy; 2026 Breeze UI Architecture &bull; Universal app.css Styled Error Prototype
+    </footer>
+</body>
+</html>

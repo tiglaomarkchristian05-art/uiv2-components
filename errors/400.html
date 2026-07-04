@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>400 Bad Request - Standard Breeze UI</title>
+    <meta name="description" content="Production-ready 400 Bad Request page template styled with pure CSS using universal app.css design tokens.">
+    <!-- Reference to universal design system -->
+    <link rel="stylesheet" href="../app.css">
+    <script src="../app.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body class="bg-surface-container-low min-h-screen flex flex-col items-center justify-center p-4 selection:bg-gray-800/10 selection:text-gray-900 font-body text-on-surface">
+
+    <!-- Top Bar Navigation for Standalone Prototype -->
+    <div class="absolute top-6 left-6 z-10">
+        <a href="code.html" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface shadow-sm border border-outline-variant/30 text-sm font-medium text-on-surface-variant hover:text-primary hover:border-primary/40 transition-all">
+            <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+            <span>All Error States</span>
+        </a>
+    </div>
+
+    <!-- 400 Error Main Card Container -->
+    <main class="w-full max-w-xl bg-surface-container-lowest rounded-2xl shadow-xl border border-outline-variant/30 p-8 md:p-12 text-center relative overflow-hidden">
+        
+        <!-- Decorative Background Glow -->
+        <div class="absolute -top-24 -right-24 w-48 h-48 bg-gray-200 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-gray-100 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Status Badge -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gray-100 border border-gray-200 text-gray-800 text-xs font-semibold uppercase tracking-wider mb-8">
+            <span class="w-2 h-2 rounded-full bg-gray-600"></span>
+            <span>HTTP 400 &bull; Malformed Request</span>
+        </div>
+
+        <!-- Hero Icon -->
+        <div class="mx-auto w-24 h-24 rounded-2xl bg-gray-50 border-2 border-gray-200 flex items-center justify-center mb-6 shadow-sm text-gray-700 transform hover:rotate-6 transition-transform duration-300">
+            <span class="material-symbols-outlined text-[52px]" style="font-variation-settings: 'FILL' 1, 'wght' 500;">error_outline</span>
+        </div>
+
+        <!-- Error Headline -->
+        <h1 class="text-3xl md:text-4xl font-headline font-black text-on-surface mb-3 tracking-tight">
+            Bad Request
+        </h1>
+
+        <!-- Error Description -->
+        <p class="text-on-surface-variant text-base md:text-lg max-w-md mx-auto mb-8 leading-relaxed">
+            The server could not understand your request due to invalid syntax, corrupted cookie headers, or malformed parameters.
+        </p>
+
+        <!-- Troubleshooting Box -->
+        <div class="bg-surface-container-low border border-outline-variant/40 rounded-xl p-4 mb-8 max-w-md mx-auto text-left">
+            <span class="text-xs font-semibold text-on-surface block mb-2 flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px] text-gray-700">build</span>
+                Suggested Actions:
+            </span>
+            <ul class="text-xs text-on-surface-variant space-y-1.5 list-disc pl-5">
+                <li>Clear your browser cookies and cached data for this domain.</li>
+                <li>Check the URL parameters for special characters or formatting typos.</li>
+                <li>Ensure any uploaded file sizes are within the maximum permitted limit.</li>
+            </ul>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <button onclick="window.history.back();" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-on-primary font-medium shadow-md hover:bg-primary-hover active:scale-[0.98] transition-all duration-200">
+                <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+                <span>Go Back</span>
+            </button>
+            <a href="../index.html" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-surface border border-outline-variant text-on-surface font-medium hover:bg-surface-container-low active:scale-[0.98] transition-all duration-200">
+                <span class="material-symbols-outlined text-[20px]">home</span>
+                <span>Return to Hub</span>
+            </a>
+            <button onclick="alert('Browser cache clearing instructions: Press Ctrl+Shift+Delete (or Cmd+Shift+Delete on macOS) and select Cached Images and Cookies.');" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-on-surface-variant hover:text-primary hover:bg-primary-container/10 font-medium transition-colors text-sm">
+                <span class="material-symbols-outlined text-[18px]">delete_sweep</span>
+                <span>Clear Cache Help</span>
+            </button>
+        </div>
+
+        <!-- Footer Help Text -->
+        <div class="mt-8 pt-6 border-t border-outline-variant/20 text-xs text-on-surface-variant/80">
+            Encountering persistent 400 errors? <a href="#" onclick="alert('Diagnostic logs exported.');" class="text-primary hover:underline font-medium">Export diagnostic logs</a> for your developer.
+        </div>
+
+    </main>
+
+    <!-- Page Footer -->
+    <footer class="mt-8 text-center text-xs text-on-surface-variant/70">
+        &copy; 2026 Breeze UI Architecture &bull; Universal app.css Styled Error Prototype
+    </footer>
+</body>
+</html>

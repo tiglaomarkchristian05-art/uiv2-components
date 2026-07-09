@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebarSubsystemNavPanel = document.getElementById('sidebar-subsystem-nav-panel');
     const sidebarSubsystemModulesNav = document.getElementById('sidebar-subsystem-modules-nav');
 
-    if (!dashboardHeading || !dashboardCopy || !dashboardStatsGrid || !dashboardCharts || !dashboardChartOverview || !dashboardChartBreakdown || !dashboardQuickActionsList || !dashboardActivityBody || !breadcrumbCategory || !sidebarBrandTitle || !sidebarBrandCategory || !sidebarSubsystemNavPanel || !sidebarSubsystemModulesNav) return;
+    if (!dashboardHeading || !dashboardCopy || !dashboardStatsGrid || !dashboardCharts || !dashboardChartOverview || !dashboardChartBreakdown || !dashboardQuickActionsList || !dashboardActivityBody || !sidebarBrandTitle || !sidebarBrandCategory || !sidebarSubsystemNavPanel || !sidebarSubsystemModulesNav) return;
 
     const normalizeStatValue = value => {
         if (typeof value === 'number') return Math.min(100, Math.max(5, Math.round(value)));
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Budget Management': 'account_balance',
         'Cash Management': 'account_balance_wallet',
         'Financial Reporting & Analytics': 'insights',
-        'Tax Management': 'tax',
+        'Tax Management': 'request_quote',
         'Smart Warehousing System (SWS)': 'warehouse',
         'Inventory Management System': 'inventory_2',
         'Procurement & Sourcing Management (PSM)': 'shopping_bag',
@@ -173,40 +173,50 @@ document.addEventListener('DOMContentLoaded', () => {
     document.title = `${subsystem.title} — Dashboard`;
     dashboardHeading.textContent = 'Welcome back, Admin';
     dashboardCopy.textContent = `Here's what's happening in ${subsystem.title} today.`;
-    breadcrumbCategory.textContent = subsystem.title;
+    if (breadcrumbCategory) breadcrumbCategory.textContent = subsystem.title;
     sidebarBrandTitle.textContent = subsystem.title;
     sidebarBrandCategory.textContent = subsystem.category;
-    sidebarSubsystemModulesNav.innerHTML = subsystem.modules.map(module => {
+    sidebarSubsystemModulesNav.innerHTML = subsystem.modules.map((module, index) => {
         const moduleName = typeof module === 'string' ? module : module.name;
+        const isActive = index === 0;
         return `
-            <a href="#" class="sidebar-subsystem-link">
+            <a href="#" class="sidebar-subsystem-link ${isActive ? 'active' : ''}">
                 <span class="material-symbols-outlined sidebar-subsystem-link-icon">${getModuleIcon(moduleName)}</span>
-                <span>${moduleName}</span>
+                <span class="truncate">${moduleName}</span>
             </a>
         `;
     }).join('');
     sidebarSubsystemNavPanel.classList.remove('hidden');
 
     dashboardStatsGrid.innerHTML = subsystem.stats.map(stat => {
-        const toneClasses = {
-            positive: 'text-emerald-600',
-            neutral: 'text-slate-700',
-            caution: 'text-amber-600',
+        const deltaMap = {
+            'Pipeline Value': { text: '+12.4% vs last month', isPositive: true },
+            'Open Requests': { text: '+8.6% vs last week', isPositive: true },
+            'Active Clients': { text: '+3.2% vs last quarter', isPositive: true },
+            'Fill Rate': { text: '+4.5% vs target', isPositive: true }
         };
+        const defaultDelta = stat.tone === 'positive'
+            ? { text: '+12% vs last month', isPositive: true }
+            : stat.tone === 'caution'
+            ? { text: '-2.4% vs last month', isPositive: false }
+            : { text: '+1.8% vs last month', isPositive: true };
+        const delta = stat.delta || deltaMap[stat.label] || defaultDelta;
+
         return `
-            <div class="bg-surface rounded-xl p-5 shadow-sm border border-outline-variant/30 flex flex-col justify-between">
-                <div class="flex justify-between items-start mb-4">
-                    <div>
-                        <p class="text-sm font-medium text-on-surface-variant">${stat.label}</p>
-                        <h3 class="text-2xl font-headline font-bold text-on-surface mt-1">${stat.value}</h3>
-                    </div>
-                    <div class="p-2 bg-primary-container/10 rounded-lg text-primary">
-                        <span class="material-symbols-outlined">${stat.icon}</span>
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col justify-between gap-4 overflow-hidden relative">
+                <div class="flex items-center justify-between gap-3">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">${stat.label}</p>
+                    <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-[20px]">${stat.icon}</span>
                     </div>
                 </div>
-                <div class="flex items-center text-sm">
-                    <span class="${toneClasses[stat.tone] || 'text-slate-700'} font-medium">
-                        ${stat.tone === 'positive' ? '+' : ''}${stat.value}
+                <div>
+                    <h3 class="text-3xl font-headline font-bold text-slate-900 leading-none">${stat.value}</h3>
+                </div>
+                <div class="flex items-center gap-2 pt-3 border-t border-slate-100 text-xs">
+                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md font-semibold ${delta.isPositive ? 'text-emerald-700 bg-emerald-50' : 'text-rose-700 bg-rose-50'}">
+                        <span class="material-symbols-outlined text-[15px]">${delta.isPositive ? 'trending_up' : 'trending_down'}</span>
+                        <span>${delta.text}</span>
                     </span>
                 </div>
             </div>
@@ -247,7 +257,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h3 class="text-2xl font-headline font-bold text-on-surface">${overviewMetric}</h3>
                     <p class="text-sm text-on-surface-variant mt-2">${overviewSubtitle}</p>
                 </div>
-                <button class="dashboard-chart-filter-button">${overviewTrend}</button>
+                <button class="dashboard-chart-filter-button inline-flex items-center gap-1.5 hover:border-slate-300 transition-colors">
+                    <span>${overviewTrend}</span>
+                    <span class="material-symbols-outlined text-[18px]">keyboard_arrow_down</span>
+                </button>
             </div>
             ${renderLineChart(overviewData)}
             <div class="grid gap-3 sm:grid-cols-2 mt-5">

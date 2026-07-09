@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en"><head>
 <link href="../app.css" rel="stylesheet"/>
@@ -62,7 +62,45 @@
                 Resend code
             </button>
 </p>
+<div class="mt-6 pt-6 border-t border-outline-variant/30 text-center">
+<a class="inline-flex items-center justify-center gap-1.5 text-xs font-medium text-on-surface-variant hover:text-primary transition-colors" href="../authentication_card_component_standard/code.html" id="back-to-login-link">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+                Back to Sign In
+            </a>
 </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const subsystem = params.get('subsystem');
+    if (subsystem) {
+        const backLink = document.getElementById('back-to-login-link');
+        if (backLink) backLink.href = `../authentication_card_component_standard/code.html?subsystem=${encodeURIComponent(subsystem)}`;
+    }
+});
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('#otp-container input');
+    inputs.forEach((input, index) => {
+        input.addEventListener('input', (e) => {
+            if (input.value.length === 1 && index < inputs.length - 1) {
+                inputs[index + 1].focus();
+            }
+        });
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Backspace' && !input.value && index > 0) {
+                inputs[index - 1].focus();
+            }
+        });
+    });
+
+    document.querySelector('form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const params = new URLSearchParams(window.location.search);
+        const subsystem = params.get('subsystem') || 'client-management';
+        window.location.href = `../dashboard_app_layout/code.html?subsystem=${encodeURIComponent(subsystem)}`;
+    });
+});
+</script>
 </body></html>
 
 

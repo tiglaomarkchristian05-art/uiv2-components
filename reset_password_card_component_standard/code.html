@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en"><head>
 <link href="../app.css" rel="stylesheet"/>
@@ -71,13 +71,30 @@
 </div>
 </form>
 <div class="mt-6 text-center">
-<a class="text-sm font-medium text-primary-container hover:text-primary transition-colors flex items-center justify-center gap-1" href="#">
+<a class="text-sm font-medium text-primary-container hover:text-primary transition-colors flex items-center justify-center gap-1" href="../authentication_card_component_standard/code.html" id="back-to-login-link">
 <span class="material-symbols-outlined text-[18px]" data-icon="arrow_back">arrow_back</span>
                     Back to login
                 </a>
 </div>
 </div>
 </main>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const subsystem = params.get('subsystem');
+    if (subsystem) {
+        const backLink = document.getElementById('back-to-login-link');
+        if (backLink) backLink.href = `../authentication_card_component_standard/code.html?subsystem=${encodeURIComponent(subsystem)}`;
+    }
+});
+
+document.querySelector('form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const params = new URLSearchParams(window.location.search);
+    const subsystem = params.get('subsystem') || 'client-management';
+    window.location.href = `../authentication_card_component_standard/code.html?subsystem=${encodeURIComponent(subsystem)}`;
+});
+</script>
 </body></html>
 
 

@@ -1,242 +1,707 @@
-﻿<!DOCTYPE html>
-
-<html class="light" lang="en"><head>
-<link href="../app.css" rel="stylesheet"/>
-<script src="../app.js" defer></script>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Data Table Component Standards</title>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <link href="../app.css" rel="stylesheet"/>
+    <script src="../app.js" defer></script>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Enterprise Material Data Grid Standards</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <style>
+        /* Component-Specific Responsive Layout Safeguards */
+        html, body {
+            max-width: 100vw !important;
+            overflow-x: hidden !important;
+            margin: 0 !important;
+        }
+        * {
+            box-sizing: border-box !important;
+        }
+        /* Mobile vs Desktop View Switching */
+        @media (max-width: 767px) {
+            .desktop-table-view {
+                display: none !important;
+            }
+            .mobile-card-view {
+                display: block !important;
+            }
+            .responsive-header,
+            .responsive-toolbar,
+            .responsive-selection-bar,
+            .responsive-footer {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                width: 100% !important;
+            }
+            .responsive-btn-group {
+                width: 100% !important;
+                display: flex !important;
+                flex-wrap: wrap !important;
+                gap: 0.5rem !important;
+            }
+            .responsive-btn-group > button {
+                flex: 1 1 auto !important;
+                justify-content: center !important;
+            }
+            .responsive-search {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+        }
+        @media (min-width: 768px) {
+            .desktop-table-view {
+                display: block !important;
+            }
+            .mobile-card-view {
+                display: none !important;
+            }
+        }
+    </style>
 </head>
-<body class="bg-surface-dim min-h-screen p-8 font-body text-on-surface">
-<div class="max-w-7xl mx-auto space-y-8">
-<!-- Header -->
-<header class="space-y-2">
-<h1 class="text-3xl font-headline font-bold text-on-surface">Data Table Component Standards</h1>
-<p class="text-on-surface-variant font-label max-w-2xl">
-                A standardized implementation for complex data grids featuring robust filtering, multi-select capabilities, actionable rows, and pagination. Designed for high-density information displays.
-            </p>
-</header>
-<!-- Main Content Area -->
-<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant overflow-hidden">
-<!-- Filter & Control Bar -->
-<div class="p-4 border-b border-outline-variant flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-surface-container-low">
-<div class="flex flex-wrap items-center gap-2">
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
-<input class="pl-9 pr-4 py-2 border border-outline-variant rounded-lg text-sm bg-surface-container-lowest focus:ring-2 focus:ring-primary-container focus:border-primary-container w-64 font-label" placeholder="Search records..." type="text"/>
-</div>
-<div class="flex items-center gap-2">
-<span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-primary-container/10 text-primary-container text-sm font-medium border border-primary-container/20 cursor-pointer hover:bg-primary-container/20 transition-colors">
-                            Status: Active
-                            <span class="material-symbols-outlined text-xs">close</span>
-</span>
-<span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface-variant text-on-surface-variant text-sm font-medium border border-outline-variant cursor-pointer hover:bg-surface-container-highest transition-colors">
-                            Role: Admin
-                            <span class="material-symbols-outlined text-xs">close</span>
-</span>
-<button class="text-primary-container text-sm font-medium hover:underline flex items-center gap-1 px-2">
-<span class="material-symbols-outlined text-sm">add</span> Add Filter
-                        </button>
-</div>
-</div>
-<div class="flex items-center gap-2">
-<button class="p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors border border-outline-variant bg-surface-container-lowest shadow-sm">
-<span class="material-symbols-outlined">filter_list</span>
-</button>
-<button class="p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors border border-outline-variant bg-surface-container-lowest shadow-sm">
-<span class="material-symbols-outlined">view_column</span>
-</button>
-<button class="px-4 py-2 bg-primary-container text-on-primary-container rounded-lg font-medium text-sm hover:bg-primary transition-colors shadow-sm flex items-center gap-2">
-<span class="material-symbols-outlined text-sm">add</span> New Record
+<body class="bg-surface-dim min-h-screen p-3 sm:p-6 md:p-10 font-body text-on-surface antialiased overflow-x-hidden w-full max-w-full">
+    <div class="w-full max-w-7xl mx-auto space-y-6 sm:space-y-8 min-w-0">
+        <!-- Component Header & Dynamic Module Guidelines -->
+        <header class="responsive-header flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-outline-variant/60 w-full max-w-full">
+            <div class="space-y-1.5 min-w-0 flex-1">
+                <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider font-label">
+                    <span class="material-symbols-outlined text-[16px]">view_list</span>
+                    Dynamic Grid Standard
+                </div>
+                <h1 class="text-xl sm:text-2xl md:text-3xl font-headline font-bold text-on-surface tracking-tight break-words">Enterprise Material Data Grid</h1>
+                <p class="text-on-surface-variant text-xs sm:text-sm md:text-base leading-relaxed break-words">
+                    A modular, highly reusable data grid template structured for dynamic multi-module data binding. Automatically adapts between desktop table layout and responsive mobile card layout.
+                </p>
+            </div>
+            <!-- Responsive Action Buttons -->
+            <div class="responsive-btn-group flex flex-wrap items-center gap-2 sm:gap-3 shrink-0">
+                <button class="px-3.5 py-2 bg-surface-container-lowest text-on-surface border border-outline-variant/80 rounded-lg text-xs sm:text-sm font-medium hover:bg-surface-container transition-colors shadow-sm inline-flex items-center justify-center gap-1.5">
+                    <span class="material-symbols-outlined text-[18px]">code</span>
+                    Specification
+                </button>
+                <button class="px-4 py-2 bg-primary text-on-primary rounded-lg text-xs sm:text-sm font-semibold hover:bg-primary/90 transition-colors shadow-sm inline-flex items-center justify-center gap-1.5">
+                    <span class="material-symbols-outlined text-[18px]">add_circle</span>
+                    New Entity
+                </button>
+            </div>
+        </header>
+
+        <!-- Dynamic Table Container Wrapper -->
+        <div class="bg-surface-container-lowest rounded-xl sm:rounded-2xl shadow-md border border-outline-variant/60 overflow-hidden w-full max-w-full min-w-0">
+            
+            <!-- 1. Contextual Selection Header -->
+            <div class="responsive-selection-bar bg-primary-container/20 border-b border-primary-container/30 p-3 sm:px-6 sm:py-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 w-full max-w-full">
+                <div class="flex items-center gap-2 sm:gap-3 min-w-0 flex-wrap">
+                    <span class="inline-flex items-center justify-center h-6 w-6 rounded-full bg-primary text-on-primary text-xs font-bold shrink-0">
+                        2
+                    </span>
+                    <span class="text-xs sm:text-sm font-semibold text-on-surface break-words">records selected across query</span>
+                </div>
+                <div class="responsive-btn-group flex flex-wrap items-center gap-1.5 sm:gap-2 w-full sm:w-auto">
+                    <button class="px-2.5 py-1.5 text-xs font-medium rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container transition-colors border border-outline-variant inline-flex items-center justify-center gap-1 shadow-sm">
+                        <span class="material-symbols-outlined text-[16px]">file_download</span>
+                        Export
                     </button>
-</div>
-</div>
-<!-- Table -->
-<div class="overflow-x-auto">
-<table class="w-full text-left border-collapse">
-<thead class="bg-surface-container-low border-b border-outline-variant">
-<tr>
-<th class="p-4 w-12" scope="col">
-<input class="rounded border-outline-variant text-primary-container focus:ring-primary-container h-4 w-4 bg-surface-container-lowest cursor-pointer" type="checkbox"/>
-</th>
-<th class="px-6 py-4 text-xs font-semibold text-on-surface-variant uppercase tracking-wider font-label cursor-pointer hover:bg-surface-container transition-colors group" scope="col">
-<div class="flex items-center gap-1">
-                                    User <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity">arrow_upward</span>
-</div>
-</th>
-<th class="px-6 py-4 text-xs font-semibold text-on-surface-variant uppercase tracking-wider font-label cursor-pointer hover:bg-surface-container transition-colors group" scope="col">
-<div class="flex items-center gap-1">
-                                    Role <span class="material-symbols-outlined text-sm opacity-50 group-hover:opacity-100 transition-opacity">unfold_more</span>
-</div>
-</th>
-<th class="px-6 py-4 text-xs font-semibold text-on-surface-variant uppercase tracking-wider font-label cursor-pointer hover:bg-surface-container transition-colors group" scope="col">
-<div class="flex items-center gap-1">
-                                    Status <span class="material-symbols-outlined text-sm opacity-50 group-hover:opacity-100 transition-opacity">unfold_more</span>
-</div>
-</th>
-<th class="px-6 py-4 text-xs font-semibold text-on-surface-variant uppercase tracking-wider font-label cursor-pointer hover:bg-surface-container transition-colors group" scope="col">
-<div class="flex items-center gap-1">
-                                    Last Active <span class="material-symbols-outlined text-sm opacity-50 group-hover:opacity-100 transition-opacity">unfold_more</span>
-</div>
-</th>
-<th class="px-6 py-4 text-xs font-semibold text-on-surface-variant uppercase tracking-wider font-label text-right" scope="col">
+                    <button class="px-2.5 py-1.5 text-xs font-medium rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container transition-colors border border-outline-variant inline-flex items-center justify-center gap-1 shadow-sm">
+                        <span class="material-symbols-outlined text-[16px]">edit_note</span>
+                        Bulk Update
+                    </button>
+                    <button class="px-2.5 py-1.5 text-xs font-medium rounded-lg bg-error-container text-on-error-container hover:brightness-95 transition-colors inline-flex items-center justify-center gap-1 shadow-sm">
+                        <span class="material-symbols-outlined text-[16px]">delete</span>
+                        Delete
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2. Primary Toolbar: Fully Responsive Search, Filters & Grid Controls -->
+            <div class="responsive-toolbar p-3 sm:p-5 border-b border-outline-variant/50 flex flex-col lg:flex-row justify-between items-stretch lg:items-center gap-4 bg-surface-container-lowest w-full max-w-full min-w-0">
+                <!-- Search & Active Filters -->
+                <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 flex-1 min-w-0">
+                    <div class="responsive-search relative w-full sm:w-72 md:w-80 shrink-0">
+                        <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant/70 text-[20px]">search</span>
+                        <input type="text" placeholder="Filter by keyword or ID..." class="w-full pl-10 pr-4 py-2 rounded-xl border border-outline-variant bg-surface-container-low/50 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body"/>
+                    </div>
+                    
+                    <!-- Quick Filter Chips -->
+                    <div class="flex items-center gap-1.5 flex-wrap min-w-0">
+                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-primary/10 text-primary text-xs font-semibold border border-primary/20 shrink-0">
+                            <span class="material-symbols-outlined text-[14px]">check_circle</span>
+                            Status: Active
+                            <button class="hover:text-primary/70 transition-colors inline-flex items-center">
+                                <span class="material-symbols-outlined text-[14px]">close</span>
+                            </button>
+                        </span>
+                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface-container text-on-surface-variant text-xs font-medium border border-outline-variant/60 shrink-0">
+                            <span class="material-symbols-outlined text-[14px]">domain</span>
+                            Module: Core
+                            <button class="hover:text-on-surface transition-colors inline-flex items-center">
+                                <span class="material-symbols-outlined text-[14px]">close</span>
+                            </button>
+                        </span>
+                        <button class="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-semibold text-primary hover:bg-primary/5 transition-colors shrink-0">
+                            <span class="material-symbols-outlined text-[16px]">filter_alt</span>
+                            + Add Filter
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Grid Configuration & Global Module Actions -->
+                <div class="flex flex-wrap items-center justify-between sm:justify-end gap-2 border-t lg:border-t-0 pt-3 lg:pt-0 border-outline-variant/50 w-full lg:w-auto shrink-0">
+                    <div class="inline-flex rounded-lg border border-outline-variant/80 bg-surface-container-low/40 p-0.5 shrink-0">
+                        <button title="Comfortable Density" class="p-1.5 rounded-md bg-surface-container-lowest text-primary shadow-sm flex items-center justify-center">
+                            <span class="material-symbols-outlined text-[18px]">table_rows</span>
+                        </button>
+                        <button title="Compact Density" class="p-1.5 rounded-md text-on-surface-variant hover:text-on-surface flex items-center justify-center">
+                            <span class="material-symbols-outlined text-[18px]">reorder</span>
+                        </button>
+                    </div>
+                    
+                    <div class="responsive-btn-group flex items-center gap-1.5 flex-wrap">
+                        <button class="px-2.5 sm:px-3 py-2 bg-surface-container-lowest text-on-surface border border-outline-variant rounded-lg text-xs font-medium hover:bg-surface-container transition-colors shadow-sm inline-flex items-center justify-center gap-1">
+                            <span class="material-symbols-outlined text-[16px]">view_column</span>
+                            <span>Columns</span>
+                        </button>
+
+                        <button class="px-2.5 sm:px-3 py-2 bg-surface-container-lowest text-on-surface border border-outline-variant rounded-lg text-xs font-medium hover:bg-surface-container transition-colors shadow-sm inline-flex items-center justify-center gap-1">
+                            <span class="material-symbols-outlined text-[16px]">refresh</span>
+                            <span>Refresh</span>
+                        </button>
+
+                        <button class="px-3 py-2 bg-primary text-on-primary rounded-lg text-xs font-semibold hover:bg-primary/90 transition-colors shadow-sm inline-flex items-center justify-center gap-1">
+                            <span class="material-symbols-outlined text-[16px]">add</span>
+                            <span>Create Record</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3A. MOBILE RESPONSIVE CARD VIEW (Visible on small mobile viewports < 768px) -->
+            <div class="mobile-card-view divide-y divide-outline-variant/60 bg-surface-container-lowest w-full max-w-full">
+                <!-- Mobile Card 1 -->
+                <div class="p-4 space-y-3 bg-primary/[0.03] w-full max-w-full">
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="flex items-center gap-2.5 min-w-0">
+                            <input type="checkbox" checked="" class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4 shrink-0 cursor-pointer"/>
+                            <div class="h-9 w-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-bold text-xs border border-primary/20 shrink-0">
+                                MOD
+                            </div>
+                            <div class="min-w-0">
+                                <h4 class="font-semibold text-sm text-on-surface truncate">Order Processing Pipeline</h4>
+                                <span class="font-mono text-[11px] text-on-surface-variant">SYS-8821</span>
+                            </div>
+                        </div>
+                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#e8f5e9] text-[#1b5e20] border border-[#a5d6a7] shrink-0">
+                            Operational
+                        </span>
+                    </div>
+
+                    <div class="space-y-1 bg-surface-container-low/60 p-2.5 rounded-lg border border-outline-variant/40">
+                        <div class="flex justify-between text-xs">
+                            <span class="text-on-surface-variant font-medium">Allocation (Commerce Core)</span>
+                            <span class="font-semibold text-on-surface">86% (430/500)</span>
+                        </div>
+                        <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+                            <div class="h-full bg-primary rounded-full" style="width: 86%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs pt-1">
+                        <span class="text-on-surface-variant">Modified: Oct 24, 2026</span>
+                        <div class="flex items-center gap-1">
+                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">edit</span>
+                            </button>
+                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">visibility</span>
+                            </button>
+                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">more_vert</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Card 2 -->
+                <div class="p-4 space-y-3 w-full max-w-full">
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="flex items-center gap-2.5 min-w-0">
+                            <input type="checkbox" checked="" class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4 shrink-0 cursor-pointer"/>
+                            <div class="h-9 w-9 rounded-xl bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-xs border border-outline-variant shrink-0">
+                                AUTH
+                            </div>
+                            <div class="min-w-0">
+                                <h4 class="font-semibold text-sm text-on-surface truncate">Identity & Access Gateway</h4>
+                                <span class="font-mono text-[11px] text-on-surface-variant">SYS-7042</span>
+                            </div>
+                        </div>
+                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#e8f5e9] text-[#1b5e20] border border-[#a5d6a7] shrink-0">
+                            Operational
+                        </span>
+                    </div>
+
+                    <div class="space-y-1 bg-surface-container-low/60 p-2.5 rounded-lg border border-outline-variant/40">
+                        <div class="flex justify-between text-xs">
+                            <span class="text-on-surface-variant font-medium">Allocation (Security)</span>
+                            <span class="font-semibold text-on-surface">42% (210/500)</span>
+                        </div>
+                        <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+                            <div class="h-full bg-primary rounded-full" style="width: 42%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs pt-1">
+                        <span class="text-on-surface-variant">Modified: Oct 23, 2026</span>
+                        <div class="flex items-center gap-1">
+                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">edit</span>
+                            </button>
+                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">visibility</span>
+                            </button>
+                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">more_vert</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Card 3 -->
+                <div class="p-4 space-y-3 w-full max-w-full">
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="flex items-center gap-2.5 min-w-0">
+                            <input type="checkbox" class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4 shrink-0 cursor-pointer"/>
+                            <div class="h-9 w-9 rounded-xl bg-amber-500/10 text-amber-700 flex items-center justify-center font-bold text-xs border border-amber-500/20 shrink-0">
+                                SYNC
+                            </div>
+                            <div class="min-w-0">
+                                <h4 class="font-semibold text-sm text-on-surface truncate">Warehouse ERP Replication</h4>
+                                <span class="font-mono text-[11px] text-on-surface-variant">SYS-4190</span>
+                            </div>
+                        </div>
+                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#fff8e1] text-[#b7791f] border border-[#ffe082] shrink-0">
+                            Maintenance
+                        </span>
+                    </div>
+
+                    <div class="space-y-1 bg-surface-container-low/60 p-2.5 rounded-lg border border-outline-variant/40">
+                        <div class="flex justify-between text-xs">
+                            <span class="text-on-surface-variant font-medium">Allocation (Supply Chain)</span>
+                            <span class="font-semibold text-on-surface">94% (470/500)</span>
+                        </div>
+                        <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+                            <div class="h-full bg-amber-500 rounded-full" style="width: 94%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs pt-1">
+                        <span class="text-on-surface-variant">Modified: Oct 21, 2026</span>
+                        <div class="flex items-center gap-1">
+                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">edit</span>
+                            </button>
+                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">visibility</span>
+                            </button>
+                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">more_vert</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Card 4 -->
+                <div class="p-4 space-y-3 w-full max-w-full">
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="flex items-center gap-2.5 min-w-0">
+                            <input type="checkbox" class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4 shrink-0 cursor-pointer"/>
+                            <div class="h-9 w-9 rounded-xl bg-surface-variant text-on-surface-variant flex items-center justify-center font-bold text-xs border border-outline-variant shrink-0">
+                                LOGS
+                            </div>
+                            <div class="min-w-0">
+                                <h4 class="font-semibold text-sm text-on-surface truncate">Legacy Telemetry Collector</h4>
+                                <span class="font-mono text-[11px] text-on-surface-variant">SYS-1093</span>
+                            </div>
+                        </div>
+                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-surface-variant text-on-surface-variant border border-outline-variant shrink-0">
+                            Archived
+                        </span>
+                    </div>
+
+                    <div class="space-y-1 bg-surface-container-low/60 p-2.5 rounded-lg border border-outline-variant/40">
+                        <div class="flex justify-between text-xs">
+                            <span class="text-on-surface-variant font-medium">Allocation (Analytics)</span>
+                            <span class="font-semibold text-on-surface">0% (0/500)</span>
+                        </div>
+                        <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+                            <div class="h-full bg-on-surface-variant/40 rounded-full" style="width: 0%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs pt-1">
+                        <span class="text-on-surface-variant">Modified: Sep 15, 2026</span>
+                        <div class="flex items-center gap-1">
+                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">edit</span>
+                            </button>
+                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">visibility</span>
+                            </button>
+                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">more_vert</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3B. DESKTOP ENTERPRISE TABLE VIEW (Visible on screens >= 768px) -->
+            <div class="desktop-table-view w-full overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <!-- Column Header Row -->
+                    <thead class="bg-surface-container-low/80 border-b border-outline-variant/80 text-on-surface-variant select-none">
+                        <tr>
+                            <!-- Selection Checkbox Column -->
+                            <th scope="col" class="py-3.5 pl-6 pr-3 w-12 text-center">
+                                <input type="checkbox" class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4 bg-surface-container-lowest cursor-pointer"/>
+                            </th>
+
+                            <!-- Sortable Primary Column: Entity / Identifier -->
+                            <th scope="col" class="py-3.5 px-4 text-xs font-bold uppercase tracking-wider font-label cursor-pointer hover:bg-surface-container/60 transition-colors group">
+                                <div class="flex items-center gap-1.5 text-on-surface">
+                                    Entity / Identifier
+                                    <span class="material-symbols-outlined text-[16px] text-primary">arrow_upward</span>
+                                </div>
+                            </th>
+
+                            <!-- Sortable Metadata Column: Reference ID -->
+                            <th scope="col" class="py-3.5 px-4 text-xs font-bold uppercase tracking-wider font-label cursor-pointer hover:bg-surface-container/60 transition-colors group">
+                                <div class="flex items-center gap-1">
+                                    Reference ID
+                                    <span class="material-symbols-outlined text-[16px] opacity-40 group-hover:opacity-100 transition-opacity">unfold_more</span>
+                                </div>
+                            </th>
+
+                            <!-- Categorical Status Column -->
+                            <th scope="col" class="py-3.5 px-4 text-xs font-bold uppercase tracking-wider font-label cursor-pointer hover:bg-surface-container/60 transition-colors group">
+                                <div class="flex items-center gap-1">
+                                    Status
+                                    <span class="material-symbols-outlined text-[16px] opacity-40 group-hover:opacity-100 transition-opacity">unfold_more</span>
+                                </div>
+                            </th>
+
+                            <!-- Numeric / Metric Column -->
+                            <th scope="col" class="py-3.5 px-4 text-xs font-bold uppercase tracking-wider font-label cursor-pointer hover:bg-surface-container/60 transition-colors group">
+                                <div class="flex items-center gap-1">
+                                    Allocation
+                                    <span class="material-symbols-outlined text-[16px] opacity-40 group-hover:opacity-100 transition-opacity">unfold_more</span>
+                                </div>
+                            </th>
+
+                            <!-- Date / Timestamp Column -->
+                            <th scope="col" class="py-3.5 px-4 text-xs font-bold uppercase tracking-wider font-label cursor-pointer hover:bg-surface-container/60 transition-colors group">
+                                <div class="flex items-center gap-1">
+                                    Last Modified
+                                    <span class="material-symbols-outlined text-[16px] opacity-40 group-hover:opacity-100 transition-opacity">unfold_more</span>
+                                </div>
+                            </th>
+
+                            <!-- Actions -->
+                            <th scope="col" class="py-3.5 pl-3 pr-6 text-xs font-bold uppercase tracking-wider font-label text-right">
                                 Actions
                             </th>
-</tr>
-</thead>
-<tbody class="divide-y divide-outline-variant bg-surface-container-lowest font-body">
-<!-- Row 1 -->
-<tr class="hover:bg-surface-container-low transition-colors group">
-<td class="p-4">
-<input class="rounded border-outline-variant text-primary-container focus:ring-primary-container h-4 w-4 bg-surface-container-lowest cursor-pointer" type="checkbox"/>
-</td>
-<td class="px-6 py-4 whitespace-nowrap">
-<div class="flex items-center">
-<div class="flex-shrink-0 h-10 w-10">
-<img alt="" class="h-10 w-10 rounded-full object-cover border border-outline-variant" data-alt="A professional headshot of a young woman with dark hair wearing glasses and a business casual blazer, set against a solid light grey background, lit with soft, even studio lighting to match a corporate application UI style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2PMwC6LHQq8w7Ka4mrT3yzs1YhJ_FGmal5vjIlLMyr5TP4eyIss8ewOjmxnr5fuZcZR-ng36UP3XzeA45AXu_F1-W3viThBXB9dREXoGuqndX0OSyjOY_7XxTQh56Ng1U_0uyv-fe6lnQ2zhs2boLTmH24ZUHRXtgTO-_4pIGYQ26ae1HRtvTd5I59OETwRMJjGPfFZgCVc9gxFXwJHFyOB4sybfaFNcJ_KwFMuoeNVnLKrmNmkJJv9W-TL7Ref4Ck7eIdVy3pfc"/>
-</div>
-<div class="ml-4">
-<div class="text-sm font-semibold text-on-surface">Jane Doe</div>
-<div class="text-sm text-on-surface-variant">jane.doe@example.com</div>
-</div>
-</div>
-</td>
-<td class="px-6 py-4 whitespace-nowrap">
-<div class="text-sm text-on-surface">Administrator</div>
-<div class="text-xs text-on-surface-variant">IT Dept</div>
-</td>
-<td class="px-6 py-4 whitespace-nowrap">
-<span class="px-2.5 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-[#e8f5e9] text-[#2e7d32] border border-[#a5d6a7]">
-                                    Active
-                                </span>
-</td>
-<td class="px-6 py-4 whitespace-nowrap text-sm text-on-surface-variant">
-                                2 mins ago
+                        </tr>
+                    </thead>
+
+                    <!-- Dynamic Table Rows -->
+                    <tbody class="divide-y divide-outline-variant/60 bg-surface-container-lowest font-body text-sm">
+                        <!-- Row 1: Selected & Active State -->
+                        <tr class="hover:bg-primary/5 transition-colors group bg-primary/[0.03]">
+                            <td class="py-3.5 pl-6 pr-3 text-center">
+                                <input type="checkbox" checked="" class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4 cursor-pointer"/>
                             </td>
-<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-<button class="text-on-surface-variant hover:text-on-surface p-1 rounded hover:bg-surface-variant transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">
-<span class="material-symbols-outlined">more_vert</span>
-</button>
-</td>
-</tr>
-<!-- Row 2 -->
-<tr class="hover:bg-surface-container-low transition-colors group bg-surface-container-low/50">
-<td class="p-4">
-<input checked="" class="rounded border-outline-variant text-primary-container focus:ring-primary-container h-4 w-4 cursor-pointer" type="checkbox"/>
-</td>
-<td class="px-6 py-4 whitespace-nowrap">
-<div class="flex items-center">
-<div class="flex-shrink-0 h-10 w-10">
-<div class="h-10 w-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-sm border border-outline-variant">
-                                            JS
+                            <td class="py-3.5 px-4 whitespace-nowrap">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-bold text-sm border border-primary/20 shrink-0">
+                                        MOD
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-on-surface group-hover:text-primary transition-colors">Order Processing Pipeline</div>
+                                        <div class="text-xs text-on-surface-variant flex items-center gap-1 mt-0.5">
+                                            <span class="material-symbols-outlined text-[14px]">account_tree</span>
+                                            Module: Commerce Core
                                         </div>
-</div>
-<div class="ml-4">
-<div class="text-sm font-semibold text-on-surface">John Smith</div>
-<div class="text-sm text-on-surface-variant">john.smith@example.com</div>
-</div>
-</div>
-</td>
-<td class="px-6 py-4 whitespace-nowrap">
-<div class="text-sm text-on-surface">Editor</div>
-<div class="text-xs text-on-surface-variant">Marketing</div>
-</td>
-<td class="px-6 py-4 whitespace-nowrap">
-<span class="px-2.5 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-[#fff8e1] text-[#f57f17] border border-[#ffe082]">
-                                    Pending
-                                </span>
-</td>
-<td class="px-6 py-4 whitespace-nowrap text-sm text-on-surface-variant">
-                                1 day ago
+                                    </div>
+                                </div>
                             </td>
-<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-<button class="text-on-surface-variant hover:text-on-surface p-1 rounded hover:bg-surface-variant transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">
-<span class="material-symbols-outlined">more_vert</span>
-</button>
-</td>
-</tr>
-<!-- Row 3 -->
-<tr class="hover:bg-surface-container-low transition-colors group">
-<td class="p-4">
-<input class="rounded border-outline-variant text-primary-container focus:ring-primary-container h-4 w-4 bg-surface-container-lowest cursor-pointer" type="checkbox"/>
-</td>
-<td class="px-6 py-4 whitespace-nowrap">
-<div class="flex items-center">
-<div class="flex-shrink-0 h-10 w-10">
-<img alt="" class="h-10 w-10 rounded-full object-cover border border-outline-variant grayscale" data-alt="A portrait of an older gentleman with a beard, wearing a collared shirt, neutral expression, set against a clean white background, conveying a corporate and professional mood suitable for a dashboard avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaFkyJh3Pwd9PSdM53oBKUM0-_6n6GPaoe3M3DSNjsFykdburixKYZeNYl7zELEqXDx_pGDvCJGrSBujeNYNdgfbIsaHvvJUjJkHrJTBiQnq96WRtYMGvndnwR5Asrw_RVgCDRmA1qfFL914mXc-J8bCajO253ueCmwCMXPXy30wbWkHwpLN5HH2yUcBBipzAxESnEXFlKETQTS3sY7Wu_r5gmYJS8JSysz5zIwyAuTgPtjyhycl8_EQX_wq7IZBc2gr3D0suEYIQ"/>
-</div>
-<div class="ml-4">
-<div class="text-sm font-semibold text-on-surface">Robert Johnson</div>
-<div class="text-sm text-on-surface-variant">robert.j@example.com</div>
-</div>
-</div>
-</td>
-<td class="px-6 py-4 whitespace-nowrap">
-<div class="text-sm text-on-surface">Viewer</div>
-<div class="text-xs text-on-surface-variant">Sales</div>
-</td>
-<td class="px-6 py-4 whitespace-nowrap">
-<span class="px-2.5 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-surface-variant text-on-surface-variant border border-outline-variant">
-                                    Inactive
+                            <td class="py-3.5 px-4 whitespace-nowrap">
+                                <span class="font-mono text-xs font-medium px-2 py-1 rounded bg-surface-container text-on-surface border border-outline-variant/60">
+                                    SYS-8821
                                 </span>
-</td>
-<td class="px-6 py-4 whitespace-nowrap text-sm text-on-surface-variant">
-                                2 weeks ago
                             </td>
-<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-<button class="text-on-surface-variant hover:text-on-surface p-1 rounded hover:bg-surface-variant transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">
-<span class="material-symbols-outlined">more_vert</span>
-</button>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<!-- Pagination -->
-<div class="bg-surface-container-lowest px-4 py-3 flex items-center justify-between border-t border-outline-variant sm:px-6">
-<div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-<div>
-<p class="text-sm text-on-surface-variant font-label">
-                            Showing <span class="font-semibold text-on-surface">1</span> to <span class="font-semibold text-on-surface">3</span> of <span class="font-semibold text-on-surface">42</span> results
-                        </p>
-</div>
-<div>
-<nav aria-label="Pagination" class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
-<a class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-outline-variant bg-surface-container-lowest text-sm font-medium text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
-<span class="sr-only">Previous</span>
-<span class="material-symbols-outlined text-sm">chevron_left</span>
-</a>
-<a aria-current="page" class="z-10 bg-primary-container/10 border-primary-container text-primary-container relative inline-flex items-center px-4 py-2 border text-sm font-medium font-label" href="#">
-                                1
-                            </a>
-<a class="bg-surface-container-lowest border-outline-variant text-on-surface-variant hover:bg-surface-container-low relative inline-flex items-center px-4 py-2 border text-sm font-medium font-label transition-colors" href="#">
-                                2
-                            </a>
-<a class="bg-surface-container-lowest border-outline-variant text-on-surface-variant hover:bg-surface-container-low relative inline-flex items-center px-4 py-2 border text-sm font-medium font-label transition-colors" href="#">
-                                3
-                            </a>
-<span class="relative inline-flex items-center px-4 py-2 border border-outline-variant bg-surface-container-lowest text-sm font-medium text-on-surface-variant font-label">
-                                ...
-                            </span>
-<a class="bg-surface-container-lowest border-outline-variant text-on-surface-variant hover:bg-surface-container-low relative inline-flex items-center px-4 py-2 border text-sm font-medium font-label transition-colors" href="#">
-                                14
-                            </a>
-<a class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-outline-variant bg-surface-container-lowest text-sm font-medium text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
-<span class="sr-only">Next</span>
-<span class="material-symbols-outlined text-sm">chevron_right</span>
-</a>
-</nav>
-</div>
-</div>
-</div>
-</div>
-</div>
-</body></html>
+                            <td class="py-3.5 px-4 whitespace-nowrap">
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#e8f5e9] text-[#1b5e20] border border-[#a5d6a7]">
+                                    <span class="h-1.5 w-1.5 rounded-full bg-[#2e7d32]"></span>
+                                    Operational
+                                </span>
+                            </td>
+                            <td class="py-3.5 px-4 whitespace-nowrap">
+                                <div class="w-28 space-y-1">
+                                    <div class="flex justify-between text-xs">
+                                        <span class="font-medium text-on-surface">86%</span>
+                                        <span class="text-on-surface-variant">430 / 500</span>
+                                    </div>
+                                    <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+                                        <div class="h-full bg-primary rounded-full" style="width: 86%;"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3.5 px-4 whitespace-nowrap text-on-surface-variant">
+                                <div class="font-medium text-on-surface">Oct 24, 2026</div>
+                                <div class="text-xs text-on-surface-variant">14:22 UTC</div>
+                            </td>
+                            <td class="py-3.5 pl-3 pr-6 whitespace-nowrap text-right">
+                                <div class="inline-flex items-center gap-0.5">
+                                    <button title="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[18px]">edit</span>
+                                    </button>
+                                    <button title="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[18px]">visibility</span>
+                                    </button>
+                                    <button title="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[18px]">more_vert</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
 
+                        <!-- Row 2: Standard Row -->
+                        <tr class="hover:bg-surface-container-low transition-colors group">
+                            <td class="py-3.5 pl-6 pr-3 text-center">
+                                <input type="checkbox" checked="" class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4 cursor-pointer"/>
+                            </td>
+                            <td class="py-3.5 px-4 whitespace-nowrap">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-10 w-10 rounded-xl bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-sm border border-outline-variant shrink-0">
+                                        AUTH
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-on-surface group-hover:text-primary transition-colors">Identity & Access Gateway</div>
+                                        <div class="text-xs text-on-surface-variant flex items-center gap-1 mt-0.5">
+                                            <span class="material-symbols-outlined text-[14px]">shield</span>
+                                            Module: Security
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3.5 px-4 whitespace-nowrap">
+                                <span class="font-mono text-xs font-medium px-2 py-1 rounded bg-surface-container text-on-surface border border-outline-variant/60">
+                                    SYS-7042
+                                </span>
+                            </td>
+                            <td class="py-3.5 px-4 whitespace-nowrap">
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#e8f5e9] text-[#1b5e20] border border-[#a5d6a7]">
+                                    <span class="h-1.5 w-1.5 rounded-full bg-[#2e7d32]"></span>
+                                    Operational
+                                </span>
+                            </td>
+                            <td class="py-3.5 px-4 whitespace-nowrap">
+                                <div class="w-28 space-y-1">
+                                    <div class="flex justify-between text-xs">
+                                        <span class="font-medium text-on-surface">42%</span>
+                                        <span class="text-on-surface-variant">210 / 500</span>
+                                    </div>
+                                    <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+                                        <div class="h-full bg-primary rounded-full" style="width: 42%;"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3.5 px-4 whitespace-nowrap text-on-surface-variant">
+                                <div class="font-medium text-on-surface">Oct 23, 2026</div>
+                                <div class="text-xs text-on-surface-variant">09:15 UTC</div>
+                            </td>
+                            <td class="py-3.5 pl-3 pr-6 whitespace-nowrap text-right">
+                                <div class="inline-flex items-center gap-0.5">
+                                    <button title="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[18px]">edit</span>
+                                    </button>
+                                    <button title="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[18px]">visibility</span>
+                                    </button>
+                                    <button title="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[18px]">more_vert</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
 
+                        <!-- Row 3: Warning / Maintenance State -->
+                        <tr class="hover:bg-surface-container-low transition-colors group">
+                            <td class="py-3.5 pl-6 pr-3 text-center">
+                                <input type="checkbox" class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4 bg-surface-container-lowest cursor-pointer"/>
+                            </td>
+                            <td class="py-3.5 px-4 whitespace-nowrap">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-10 w-10 rounded-xl bg-amber-500/10 text-amber-700 flex items-center justify-center font-bold text-sm border border-amber-500/20 shrink-0">
+                                        SYNC
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-on-surface group-hover:text-primary transition-colors">Warehouse ERP Replication</div>
+                                        <div class="text-xs text-on-surface-variant flex items-center gap-1 mt-0.5">
+                                            <span class="material-symbols-outlined text-[14px]">sync</span>
+                                            Module: Supply Chain
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3.5 px-4 whitespace-nowrap">
+                                <span class="font-mono text-xs font-medium px-2 py-1 rounded bg-surface-container text-on-surface border border-outline-variant/60">
+                                    SYS-4190
+                                </span>
+                            </td>
+                            <td class="py-3.5 px-4 whitespace-nowrap">
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#fff8e1] text-[#b7791f] border border-[#ffe082]">
+                                    <span class="h-1.5 w-1.5 rounded-full bg-[#f57f17]"></span>
+                                    Maintenance
+                                </span>
+                            </td>
+                            <td class="py-3.5 px-4 whitespace-nowrap">
+                                <div class="w-28 space-y-1">
+                                    <div class="flex justify-between text-xs">
+                                        <span class="font-medium text-on-surface">94%</span>
+                                        <span class="text-on-surface-variant">470 / 500</span>
+                                    </div>
+                                    <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+                                        <div class="h-full bg-amber-500 rounded-full" style="width: 94%;"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3.5 px-4 whitespace-nowrap text-on-surface-variant">
+                                <div class="font-medium text-on-surface">Oct 21, 2026</div>
+                                <div class="text-xs text-on-surface-variant">18:40 UTC</div>
+                            </td>
+                            <td class="py-3.5 pl-3 pr-6 whitespace-nowrap text-right">
+                                <div class="inline-flex items-center gap-0.5">
+                                    <button title="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[18px]">edit</span>
+                                    </button>
+                                    <button title="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[18px]">visibility</span>
+                                    </button>
+                                    <button title="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[18px]">more_vert</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
 
+                        <!-- Row 4: Inactive / Suspended State -->
+                        <tr class="hover:bg-surface-container-low transition-colors group">
+                            <td class="py-3.5 pl-6 pr-3 text-center">
+                                <input type="checkbox" class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4 bg-surface-container-lowest cursor-pointer"/>
+                            </td>
+                            <td class="py-3.5 px-4 whitespace-nowrap">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-10 w-10 rounded-xl bg-surface-variant text-on-surface-variant flex items-center justify-center font-bold text-sm border border-outline-variant shrink-0">
+                                        LOGS
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-on-surface group-hover:text-primary transition-colors">Legacy Telemetry Collector</div>
+                                        <div class="text-xs text-on-surface-variant flex items-center gap-1 mt-0.5">
+                                            <span class="material-symbols-outlined text-[14px]">archive</span>
+                                            Module: Analytics
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3.5 px-4 whitespace-nowrap">
+                                <span class="font-mono text-xs font-medium px-2 py-1 rounded bg-surface-container text-on-surface border border-outline-variant/60">
+                                    SYS-1093
+                                </span>
+                            </td>
+                            <td class="py-3.5 px-4 whitespace-nowrap">
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-surface-variant text-on-surface-variant border border-outline-variant">
+                                    <span class="h-1.5 w-1.5 rounded-full bg-on-surface-variant"></span>
+                                    Archived
+                                </span>
+                            </td>
+                            <td class="py-3.5 px-4 whitespace-nowrap">
+                                <div class="w-28 space-y-1">
+                                    <div class="flex justify-between text-xs">
+                                        <span class="font-medium text-on-surface">0%</span>
+                                        <span class="text-on-surface-variant">0 / 500</span>
+                                    </div>
+                                    <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+                                        <div class="h-full bg-on-surface-variant/40 rounded-full" style="width: 0%;"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3.5 px-4 whitespace-nowrap text-on-surface-variant">
+                                <div class="font-medium text-on-surface">Sep 15, 2026</div>
+                                <div class="text-xs text-on-surface-variant">11:00 UTC</div>
+                            </td>
+                            <td class="py-3.5 pl-3 pr-6 whitespace-nowrap text-right">
+                                <div class="inline-flex items-center gap-0.5">
+                                    <button title="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[18px]">edit</span>
+                                    </button>
+                                    <button title="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[18px]">visibility</span>
+                                    </button>
+                                    <button title="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[18px]">more_vert</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
+            <!-- 4. Material Grid Paginator & Footer -->
+            <div class="responsive-footer bg-surface-container-lowest p-3 sm:px-6 sm:py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-outline-variant/60 w-full max-w-full">
+                <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-6 w-full sm:w-auto">
+                    <!-- Rows Per Page Dropdown -->
+                    <div class="flex items-center gap-2 text-xs text-on-surface-variant font-label">
+                        <span>Rows per page:</span>
+                        <select class="bg-surface-container-low border border-outline-variant rounded-lg px-2 py-1 text-xs font-semibold text-on-surface focus:outline-none focus:ring-2 focus:ring-primary">
+                            <option>10</option>
+                            <option>25</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
 
+                    <div class="text-xs text-on-surface-variant font-label text-center sm:text-left">
+                        Showing <span class="font-semibold text-on-surface">1</span> – <span class="font-semibold text-on-surface">4</span> of <span class="font-semibold text-on-surface">128</span>
+                    </div>
+                </div>
+
+                <!-- Pagination Navigation Controls -->
+                <div class="flex items-center justify-center gap-1 w-full sm:w-auto">
+                    <button title="First Page" class="p-1.5 rounded-lg border border-outline-variant/80 bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors disabled:opacity-40 flex items-center justify-center shadow-sm">
+                        <span class="material-symbols-outlined text-[18px]">first_page</span>
+                    </button>
+                    <button title="Previous Page" class="p-1.5 rounded-lg border border-outline-variant/80 bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors disabled:opacity-40 flex items-center justify-center shadow-sm">
+                        <span class="material-symbols-outlined text-[18px]">chevron_left</span>
+                    </button>
+
+                    <div class="flex items-center gap-1 px-1">
+                        <button class="h-7 w-7 sm:h-8 sm:w-8 rounded-lg bg-primary text-on-primary text-xs font-bold flex items-center justify-center shadow-sm">1</button>
+                        <button class="h-7 w-7 sm:h-8 sm:w-8 rounded-lg text-on-surface-variant hover:bg-surface-container text-xs font-semibold flex items-center justify-center">2</button>
+                        <span class="text-on-surface-variant px-1">...</span>
+                        <button class="h-7 w-7 sm:h-8 sm:w-8 rounded-lg text-on-surface-variant hover:bg-surface-container text-xs font-semibold flex items-center justify-center">13</button>
+                    </div>
+
+                    <button title="Next Page" class="p-1.5 rounded-lg border border-outline-variant/80 bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors flex items-center justify-center shadow-sm">
+                        <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+                    </button>
+                    <button title="Last Page" class="p-1.5 rounded-lg border border-outline-variant/80 bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors flex items-center justify-center shadow-sm">
+                        <span class="material-symbols-outlined text-[18px]">last_page</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

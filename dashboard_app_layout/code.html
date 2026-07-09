@@ -34,16 +34,6 @@
         <div id="sidebar-subsystem-nav-panel" class="sidebar-subsystem-nav-panel">
             <nav id="sidebar-subsystem-modules-nav" class="sidebar-subsystem-modules"></nav>
         </div>
-    </nav>
-    <div class="sidebar-profile-footer px-5 pb-6 pt-4 mt-auto">
-        <div class="sidebar-profile-card">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&amp;auto=format&amp;fit=crop&amp;q=80" alt="Admin" class="w-11 h-11 rounded-2xl object-cover border border-slate-200">
-            <div class="ml-3 min-w-0">
-                <p class="text-sm font-semibold text-slate-950 truncate">Admin User</p>
-                <p class="text-xs text-slate-500 truncate">admin@example.com</p>
-            </div>
-        </div>
-    </div>
 </aside>
 <!-- Main Content Wrapper -->
 <div class="flex-1 flex flex-col h-full overflow-hidden relative">
@@ -105,24 +95,28 @@ AU
 <main class="flex-1 overflow-y-auto bg-surface-container-lowest p-6 md:p-8">
 <div class="max-w-7xl mx-auto space-y-8">
 <div class="flex flex-col gap-6">
-    <nav aria-label="Breadcrumb" class="flex flex-wrap items-center gap-2 text-sm text-on-surface-variant">
-        <a href="../index.html" class="hover:text-primary transition-colors">UI Hubs</a>
-        <span>/</span>
-        <span id="breadcrumb-category">Financial Management</span>
-        <span>/</span>
-        <span class="text-primary font-semibold">Dashboard</span>
-    </nav>
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <!-- Enterprise Dynamic Breadcrumb Standard Bar (Multi-Module Compatible) -->
+    <div class="bg-surface-container-lowest rounded-xl sm:rounded-2xl border border-outline-variant/60 shadow-sm p-4 sm:px-6 sm:py-4.5 flex flex-col md:flex-row md:items-center justify-between gap-4 w-full max-w-full">
+        <nav aria-label="Breadcrumb" class="flex flex-wrap items-center gap-2 sm:gap-3 min-w-0">
+            <!-- Active Synchronized View -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-primary/10 text-primary text-xs sm:text-sm font-bold border border-primary/20 shadow-2xs">
+                <span class="material-symbols-outlined text-[20px] fill">dashboard</span>
+                <span>Dashboard</span>
+                <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" title="Live Synchronized View"></span>
+            </div>
+        </nav>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 w-full">
         <div>
             <h1 class="text-3xl font-headline font-bold text-on-surface" id="dashboard-heading">Welcome back, Admin</h1>
             <p class="text-on-surface-variant text-sm mt-2" id="dashboard-copy">Here’s what’s happening in Financial Management today.</p>
         </div>
-        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-            <button id="export-report" class="btn-secondary dashboard-action-button">
+        <div class="flex flex-wrap items-center justify-start sm:justify-end gap-3 shrink-0">
+            <button id="export-report" class="btn-secondary dashboard-action-button m-0">
                 <span class="material-symbols-outlined">file_download</span>
                 Export Report
             </button>
-            <button id="new-transaction" class="btn-primary dashboard-action-button">
+            <button id="new-transaction" class="btn-primary dashboard-action-button m-0">
                 <span class="material-symbols-outlined">add</span>
                 New Transaction
             </button>

@@ -122,7 +122,7 @@ const SUBSYSTEMS = [
     {
         id: 'financial-management',
         title: 'Financial Management',
-        category: 'Financial Management',
+        category: 'Core Transaction 5',
         description: 'General ledger, payables, receivables, cash control, budgeting, and financial analytics.',
         stats: [
             { label: 'Total Transactions', value: '12,450', icon: 'receipt_long', tone: 'positive' },

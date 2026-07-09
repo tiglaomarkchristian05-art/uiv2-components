@@ -75,11 +75,11 @@
             </div>
             <!-- Responsive Action Buttons -->
             <div class="responsive-btn-group flex flex-wrap items-center gap-2 sm:gap-3 shrink-0">
-                <button class="px-3.5 py-2 bg-surface-container-lowest text-on-surface border border-outline-variant/80 rounded-lg text-xs sm:text-sm font-medium hover:bg-surface-container transition-colors shadow-sm inline-flex items-center justify-center gap-1.5">
+                <button type="button" title="View Component Specification" aria-label="View Component Specification" class="px-3.5 py-2 bg-surface-container-lowest text-on-surface border border-outline-variant/80 rounded-lg text-xs sm:text-sm font-medium hover:bg-surface-container transition-colors shadow-sm inline-flex items-center justify-center gap-1.5">
                     <span class="material-symbols-outlined text-[18px]">code</span>
                     Specification
                 </button>
-                <button class="px-4 py-2 bg-primary text-on-primary rounded-lg text-xs sm:text-sm font-semibold hover:bg-primary/90 transition-colors shadow-sm inline-flex items-center justify-center gap-1.5">
+                <button type="button" title="Create New Enterprise Entity" aria-label="Create New Enterprise Entity" class="px-4 py-2 bg-primary text-on-primary rounded-lg text-xs sm:text-sm font-semibold hover:bg-primary/90 transition-colors shadow-sm inline-flex items-center justify-center gap-1.5">
                     <span class="material-symbols-outlined text-[18px]">add_circle</span>
                     New Entity
                 </button>
@@ -97,18 +97,18 @@
                     </span>
                     <span class="text-xs sm:text-sm font-semibold text-on-surface break-words">records selected across query</span>
                 </div>
-                <div class="responsive-btn-group flex flex-wrap items-center gap-1.5 sm:gap-2 w-full sm:w-auto">
-                    <button class="px-2.5 py-1.5 text-xs font-medium rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container transition-colors border border-outline-variant inline-flex items-center justify-center gap-1 shadow-sm">
-                        <span class="material-symbols-outlined text-[16px]">file_download</span>
-                        Export
+                <div class="responsive-btn-group flex flex-wrap items-center gap-3 sm:gap-4 w-full sm:w-auto">
+                    <button type="button" title="Export Selected Records as CSV/PDF" aria-label="Export Selected Records as CSV/PDF" class="px-4 py-2 text-xs sm:text-sm font-medium rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors border border-outline-variant inline-flex items-center justify-center gap-2 shadow-sm leading-none">
+                        <span class="material-symbols-outlined text-[18px] leading-none flex items-center justify-center">file_download</span>
+                        <span>Export</span>
                     </button>
-                    <button class="px-2.5 py-1.5 text-xs font-medium rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container transition-colors border border-outline-variant inline-flex items-center justify-center gap-1 shadow-sm">
-                        <span class="material-symbols-outlined text-[16px]">edit_note</span>
-                        Bulk Update
+                    <button type="button" title="Bulk Update Selected Records" aria-label="Bulk Update Selected Records" class="px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg bg-primary text-on-primary hover:bg-primary/90 transition-colors border border-primary inline-flex items-center justify-center gap-2 shadow-sm leading-none">
+                        <span class="material-symbols-outlined text-[18px] leading-none flex items-center justify-center">edit_note</span>
+                        <span>Bulk Update</span>
                     </button>
-                    <button class="px-2.5 py-1.5 text-xs font-medium rounded-lg bg-error-container text-on-error-container hover:brightness-95 transition-colors inline-flex items-center justify-center gap-1 shadow-sm">
-                        <span class="material-symbols-outlined text-[16px]">delete</span>
-                        Delete
+                    <button type="button" title="Delete Selected Records" aria-label="Delete Selected Records" class="px-4 py-2 text-xs sm:text-sm font-medium rounded-lg bg-error-container text-on-error-container hover:brightness-95 transition-colors border border-error/20 inline-flex items-center justify-center gap-2 shadow-sm leading-none">
+                        <span class="material-symbols-outlined text-[18px] leading-none flex items-center justify-center">delete</span>
+                        <span>Delete</span>
                     </button>
                 </div>
             </div>
@@ -119,7 +119,7 @@
                 <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 flex-1 min-w-0">
                     <div class="responsive-search relative w-full sm:w-72 md:w-80 shrink-0">
                         <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant/70 text-[20px]">search</span>
-                        <input type="text" placeholder="Filter by keyword or ID..." class="w-full pl-10 pr-4 py-2 rounded-xl border border-outline-variant bg-surface-container-low/50 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body"/>
+                        <input type="text" title="Search Records" aria-label="Search Records" placeholder="Filter by keyword or ID..." class="w-full pl-10 pr-4 py-2 rounded-xl border border-outline-variant bg-surface-container-low/50 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body"/>
                     </div>
                     
                     <!-- Quick Filter Chips -->
@@ -127,18 +127,12 @@
                         <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-primary/10 text-primary text-xs font-semibold border border-primary/20 shrink-0">
                             <span class="material-symbols-outlined text-[14px]">check_circle</span>
                             Status: Active
-                            <button class="hover:text-primary/70 transition-colors inline-flex items-center">
+                            <button type="button" title="Remove Status Filter" aria-label="Remove Status Filter" class="hover:text-primary/70 transition-colors inline-flex items-center">
                                 <span class="material-symbols-outlined text-[14px]">close</span>
                             </button>
                         </span>
-                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface-container text-on-surface-variant text-xs font-medium border border-outline-variant/60 shrink-0">
-                            <span class="material-symbols-outlined text-[14px]">domain</span>
-                            Module: Core
-                            <button class="hover:text-on-surface transition-colors inline-flex items-center">
-                                <span class="material-symbols-outlined text-[14px]">close</span>
-                            </button>
-                        </span>
-                        <button class="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-semibold text-primary hover:bg-primary/5 transition-colors shrink-0">
+                    
+                        <button type="button" title="Add Filter Rule" aria-label="Add Filter Rule" class="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-semibold text-primary hover:bg-primary/5 transition-colors shrink-0">
                             <span class="material-symbols-outlined text-[16px]">filter_alt</span>
                             + Add Filter
                         </button>
@@ -148,26 +142,26 @@
                 <!-- Grid Configuration & Global Module Actions -->
                 <div class="flex flex-wrap items-center justify-between sm:justify-end gap-2 border-t lg:border-t-0 pt-3 lg:pt-0 border-outline-variant/50 w-full lg:w-auto shrink-0">
                     <div class="inline-flex rounded-lg border border-outline-variant/80 bg-surface-container-low/40 p-0.5 shrink-0">
-                        <button title="Comfortable Density" class="p-1.5 rounded-md bg-surface-container-lowest text-primary shadow-sm flex items-center justify-center">
+                        <button type="button" title="Comfortable View Density" aria-label="Comfortable View Density" class="p-1.5 rounded-md bg-surface-container-lowest text-primary shadow-sm flex items-center justify-center">
                             <span class="material-symbols-outlined text-[18px]">table_rows</span>
                         </button>
-                        <button title="Compact Density" class="p-1.5 rounded-md text-on-surface-variant hover:text-on-surface flex items-center justify-center">
+                        <button type="button" title="Compact View Density" aria-label="Compact View Density" class="p-1.5 rounded-md text-on-surface-variant hover:text-on-surface flex items-center justify-center">
                             <span class="material-symbols-outlined text-[18px]">reorder</span>
                         </button>
                     </div>
                     
                     <div class="responsive-btn-group flex items-center gap-1.5 flex-wrap">
-                        <button class="px-2.5 sm:px-3 py-2 bg-surface-container-lowest text-on-surface border border-outline-variant rounded-lg text-xs font-medium hover:bg-surface-container transition-colors shadow-sm inline-flex items-center justify-center gap-1">
+                        <button type="button" title="Configure Table Columns" aria-label="Configure Table Columns" class="px-2.5 sm:px-3 py-2 bg-surface-container-lowest text-on-surface border border-outline-variant rounded-lg text-xs font-medium hover:bg-surface-container transition-colors shadow-sm inline-flex items-center justify-center gap-1">
                             <span class="material-symbols-outlined text-[16px]">view_column</span>
                             <span>Columns</span>
                         </button>
 
-                        <button class="px-2.5 sm:px-3 py-2 bg-surface-container-lowest text-on-surface border border-outline-variant rounded-lg text-xs font-medium hover:bg-surface-container transition-colors shadow-sm inline-flex items-center justify-center gap-1">
+                        <button type="button" title="Refresh Grid Data" aria-label="Refresh Grid Data" class="px-2.5 sm:px-3 py-2 bg-surface-container-lowest text-on-surface border border-outline-variant rounded-lg text-xs font-medium hover:bg-surface-container transition-colors shadow-sm inline-flex items-center justify-center gap-1">
                             <span class="material-symbols-outlined text-[16px]">refresh</span>
                             <span>Refresh</span>
                         </button>
 
-                        <button class="px-3 py-2 bg-primary text-on-primary rounded-lg text-xs font-semibold hover:bg-primary/90 transition-colors shadow-sm inline-flex items-center justify-center gap-1">
+                        <button type="button" title="Create New Record" aria-label="Create New Record" class="px-3 py-2 bg-primary text-on-primary rounded-lg text-xs font-semibold hover:bg-primary/90 transition-colors shadow-sm inline-flex items-center justify-center gap-1">
                             <span class="material-symbols-outlined text-[16px]">add</span>
                             <span>Create Record</span>
                         </button>
@@ -190,7 +184,7 @@
                                 <span class="font-mono text-[11px] text-on-surface-variant">SYS-8821</span>
                             </div>
                         </div>
-                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#e8f5e9] text-[#1b5e20] border border-[#a5d6a7] shrink-0">
+                        <span class="status-badge status-badge-operational">
                             Operational
                         </span>
                     </div>
@@ -208,13 +202,13 @@
                     <div class="flex items-center justify-between text-xs pt-1">
                         <span class="text-on-surface-variant">Modified: Oct 24, 2026</span>
                         <div class="flex items-center gap-1">
-                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
+                            <button type="button" title="Edit Record" aria-label="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
                                 <span class="material-symbols-outlined text-[18px]">edit</span>
                             </button>
-                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
+                            <button type="button" title="View Details" aria-label="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
                                 <span class="material-symbols-outlined text-[18px]">visibility</span>
                             </button>
-                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
+                            <button type="button" title="More Actions" aria-label="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
                                 <span class="material-symbols-outlined text-[18px]">more_vert</span>
                             </button>
                         </div>
@@ -234,7 +228,7 @@
                                 <span class="font-mono text-[11px] text-on-surface-variant">SYS-7042</span>
                             </div>
                         </div>
-                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#e8f5e9] text-[#1b5e20] border border-[#a5d6a7] shrink-0">
+                        <span class="status-badge status-badge-operational">
                             Operational
                         </span>
                     </div>
@@ -252,13 +246,13 @@
                     <div class="flex items-center justify-between text-xs pt-1">
                         <span class="text-on-surface-variant">Modified: Oct 23, 2026</span>
                         <div class="flex items-center gap-1">
-                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
+                            <button type="button" title="Edit Record" aria-label="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
                                 <span class="material-symbols-outlined text-[18px]">edit</span>
                             </button>
-                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
+                            <button type="button" title="View Details" aria-label="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
                                 <span class="material-symbols-outlined text-[18px]">visibility</span>
                             </button>
-                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
+                            <button type="button" title="More Actions" aria-label="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
                                 <span class="material-symbols-outlined text-[18px]">more_vert</span>
                             </button>
                         </div>
@@ -278,7 +272,7 @@
                                 <span class="font-mono text-[11px] text-on-surface-variant">SYS-4190</span>
                             </div>
                         </div>
-                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#fff8e1] text-[#b7791f] border border-[#ffe082] shrink-0">
+                        <span class="status-badge status-badge-maintenance">
                             Maintenance
                         </span>
                     </div>
@@ -296,13 +290,13 @@
                     <div class="flex items-center justify-between text-xs pt-1">
                         <span class="text-on-surface-variant">Modified: Oct 21, 2026</span>
                         <div class="flex items-center gap-1">
-                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
+                            <button type="button" title="Edit Record" aria-label="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
                                 <span class="material-symbols-outlined text-[18px]">edit</span>
                             </button>
-                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
+                            <button type="button" title="View Details" aria-label="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
                                 <span class="material-symbols-outlined text-[18px]">visibility</span>
                             </button>
-                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
+                            <button type="button" title="More Actions" aria-label="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
                                 <span class="material-symbols-outlined text-[18px]">more_vert</span>
                             </button>
                         </div>
@@ -322,7 +316,7 @@
                                 <span class="font-mono text-[11px] text-on-surface-variant">SYS-1093</span>
                             </div>
                         </div>
-                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-surface-variant text-on-surface-variant border border-outline-variant shrink-0">
+                        <span class="status-badge status-badge-archived">
                             Archived
                         </span>
                     </div>
@@ -340,13 +334,13 @@
                     <div class="flex items-center justify-between text-xs pt-1">
                         <span class="text-on-surface-variant">Modified: Sep 15, 2026</span>
                         <div class="flex items-center gap-1">
-                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
+                            <button type="button" title="Edit Record" aria-label="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
                                 <span class="material-symbols-outlined text-[18px]">edit</span>
                             </button>
-                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
+                            <button type="button" title="View Details" aria-label="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
                                 <span class="material-symbols-outlined text-[18px]">visibility</span>
                             </button>
-                            <button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
+                            <button type="button" title="More Actions" aria-label="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
                                 <span class="material-symbols-outlined text-[18px]">more_vert</span>
                             </button>
                         </div>
@@ -362,7 +356,7 @@
                         <tr>
                             <!-- Selection Checkbox Column -->
                             <th scope="col" class="py-3.5 pl-6 pr-3 w-12 text-center">
-                                <input type="checkbox" class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4 bg-surface-container-lowest cursor-pointer"/>
+                                <input type="checkbox" title="Select All Records" aria-label="Select All Records" class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4 bg-surface-container-lowest cursor-pointer"/>
                             </th>
 
                             <!-- Sortable Primary Column: Entity / Identifier -->
@@ -375,33 +369,33 @@
 
                             <!-- Sortable Metadata Column: Reference ID -->
                             <th scope="col" class="py-3.5 px-4 text-xs font-bold uppercase tracking-wider font-label cursor-pointer hover:bg-surface-container/60 transition-colors group">
-                                <div class="flex items-center gap-1">
-                                    Reference ID
-                                    <span class="material-symbols-outlined text-[16px] opacity-40 group-hover:opacity-100 transition-opacity">unfold_more</span>
+                                <div class="flex items-center justify-between gap-2 whitespace-nowrap">
+                                    <span>Reference ID</span>
+                                    <span class="material-symbols-outlined text-[16px] shrink-0 opacity-0 group-hover:opacity-100 transition-opacity text-on-surface-variant">unfold_more</span>
                                 </div>
                             </th>
 
                             <!-- Categorical Status Column -->
                             <th scope="col" class="py-3.5 px-4 text-xs font-bold uppercase tracking-wider font-label cursor-pointer hover:bg-surface-container/60 transition-colors group">
-                                <div class="flex items-center gap-1">
-                                    Status
-                                    <span class="material-symbols-outlined text-[16px] opacity-40 group-hover:opacity-100 transition-opacity">unfold_more</span>
+                                <div class="flex items-center justify-between gap-2 whitespace-nowrap">
+                                    <span>Status</span>
+                                    <span class="material-symbols-outlined text-[16px] shrink-0 opacity-0 group-hover:opacity-100 transition-opacity text-on-surface-variant">unfold_more</span>
                                 </div>
                             </th>
 
                             <!-- Numeric / Metric Column -->
                             <th scope="col" class="py-3.5 px-4 text-xs font-bold uppercase tracking-wider font-label cursor-pointer hover:bg-surface-container/60 transition-colors group">
-                                <div class="flex items-center gap-1">
-                                    Allocation
-                                    <span class="material-symbols-outlined text-[16px] opacity-40 group-hover:opacity-100 transition-opacity">unfold_more</span>
+                                <div class="flex items-center justify-between gap-2 whitespace-nowrap">
+                                    <span>Allocation</span>
+                                    <span class="material-symbols-outlined text-[16px] shrink-0 opacity-0 group-hover:opacity-100 transition-opacity text-on-surface-variant">unfold_more</span>
                                 </div>
                             </th>
 
                             <!-- Date / Timestamp Column -->
                             <th scope="col" class="py-3.5 px-4 text-xs font-bold uppercase tracking-wider font-label cursor-pointer hover:bg-surface-container/60 transition-colors group">
-                                <div class="flex items-center gap-1">
-                                    Last Modified
-                                    <span class="material-symbols-outlined text-[16px] opacity-40 group-hover:opacity-100 transition-opacity">unfold_more</span>
+                                <div class="flex items-center justify-between gap-2 whitespace-nowrap">
+                                    <span>Last Modified</span>
+                                    <span class="material-symbols-outlined text-[16px] shrink-0 opacity-0 group-hover:opacity-100 transition-opacity text-on-surface-variant">unfold_more</span>
                                 </div>
                             </th>
 
@@ -439,8 +433,7 @@
                                 </span>
                             </td>
                             <td class="py-3.5 px-4 whitespace-nowrap">
-                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#e8f5e9] text-[#1b5e20] border border-[#a5d6a7]">
-                                    <span class="h-1.5 w-1.5 rounded-full bg-[#2e7d32]"></span>
+                                <span class="status-badge status-badge-operational">
                                     Operational
                                 </span>
                             </td>
@@ -461,13 +454,13 @@
                             </td>
                             <td class="py-3.5 pl-3 pr-6 whitespace-nowrap text-right">
                                 <div class="inline-flex items-center gap-0.5">
-                                    <button title="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
+                                    <button type="button" title="Edit Record" aria-label="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
                                         <span class="material-symbols-outlined text-[18px]">edit</span>
                                     </button>
-                                    <button title="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
+                                    <button type="button" title="View Details" aria-label="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
                                         <span class="material-symbols-outlined text-[18px]">visibility</span>
                                     </button>
-                                    <button title="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center">
+                                    <button type="button" title="More Actions" aria-label="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center">
                                         <span class="material-symbols-outlined text-[18px]">more_vert</span>
                                     </button>
                                 </div>
@@ -499,8 +492,7 @@
                                 </span>
                             </td>
                             <td class="py-3.5 px-4 whitespace-nowrap">
-                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#e8f5e9] text-[#1b5e20] border border-[#a5d6a7]">
-                                    <span class="h-1.5 w-1.5 rounded-full bg-[#2e7d32]"></span>
+                                <span class="status-badge status-badge-operational">
                                     Operational
                                 </span>
                             </td>
@@ -521,13 +513,13 @@
                             </td>
                             <td class="py-3.5 pl-3 pr-6 whitespace-nowrap text-right">
                                 <div class="inline-flex items-center gap-0.5">
-                                    <button title="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
+                                    <button type="button" title="Edit Record" aria-label="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
                                         <span class="material-symbols-outlined text-[18px]">edit</span>
                                     </button>
-                                    <button title="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
+                                    <button type="button" title="View Details" aria-label="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
                                         <span class="material-symbols-outlined text-[18px]">visibility</span>
                                     </button>
-                                    <button title="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center">
+                                    <button type="button" title="More Actions" aria-label="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center">
                                         <span class="material-symbols-outlined text-[18px]">more_vert</span>
                                     </button>
                                 </div>
@@ -559,8 +551,7 @@
                                 </span>
                             </td>
                             <td class="py-3.5 px-4 whitespace-nowrap">
-                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#fff8e1] text-[#b7791f] border border-[#ffe082]">
-                                    <span class="h-1.5 w-1.5 rounded-full bg-[#f57f17]"></span>
+                                <span class="status-badge status-badge-maintenance">
                                     Maintenance
                                 </span>
                             </td>
@@ -581,13 +572,13 @@
                             </td>
                             <td class="py-3.5 pl-3 pr-6 whitespace-nowrap text-right">
                                 <div class="inline-flex items-center gap-0.5">
-                                    <button title="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
+                                    <button type="button" title="Edit Record" aria-label="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
                                         <span class="material-symbols-outlined text-[18px]">edit</span>
                                     </button>
-                                    <button title="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
+                                    <button type="button" title="View Details" aria-label="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
                                         <span class="material-symbols-outlined text-[18px]">visibility</span>
                                     </button>
-                                    <button title="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center">
+                                    <button type="button" title="More Actions" aria-label="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center">
                                         <span class="material-symbols-outlined text-[18px]">more_vert</span>
                                     </button>
                                 </div>
@@ -619,8 +610,7 @@
                                 </span>
                             </td>
                             <td class="py-3.5 px-4 whitespace-nowrap">
-                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-surface-variant text-on-surface-variant border border-outline-variant">
-                                    <span class="h-1.5 w-1.5 rounded-full bg-on-surface-variant"></span>
+                                <span class="status-badge status-badge-archived">
                                     Archived
                                 </span>
                             </td>
@@ -641,13 +631,13 @@
                             </td>
                             <td class="py-3.5 pl-3 pr-6 whitespace-nowrap text-right">
                                 <div class="inline-flex items-center gap-0.5">
-                                    <button title="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
+                                    <button type="button" title="Edit Record" aria-label="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
                                         <span class="material-symbols-outlined text-[18px]">edit</span>
                                     </button>
-                                    <button title="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
+                                    <button type="button" title="View Details" aria-label="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
                                         <span class="material-symbols-outlined text-[18px]">visibility</span>
                                     </button>
-                                    <button title="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center">
+                                    <button type="button" title="More Actions" aria-label="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center">
                                         <span class="material-symbols-outlined text-[18px]">more_vert</span>
                                     </button>
                                 </div>
@@ -678,24 +668,24 @@
 
                 <!-- Pagination Navigation Controls -->
                 <div class="flex items-center justify-center gap-1 w-full sm:w-auto">
-                    <button title="First Page" class="p-1.5 rounded-lg border border-outline-variant/80 bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors disabled:opacity-40 flex items-center justify-center shadow-sm">
+                    <button type="button" title="First Page" aria-label="First Page" class="p-1.5 rounded-lg border border-outline-variant/80 bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors disabled:opacity-40 flex items-center justify-center shadow-sm">
                         <span class="material-symbols-outlined text-[18px]">first_page</span>
                     </button>
-                    <button title="Previous Page" class="p-1.5 rounded-lg border border-outline-variant/80 bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors disabled:opacity-40 flex items-center justify-center shadow-sm">
+                    <button type="button" title="Previous Page" aria-label="Previous Page" class="p-1.5 rounded-lg border border-outline-variant/80 bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors disabled:opacity-40 flex items-center justify-center shadow-sm">
                         <span class="material-symbols-outlined text-[18px]">chevron_left</span>
                     </button>
 
                     <div class="flex items-center gap-1 px-1">
-                        <button class="h-7 w-7 sm:h-8 sm:w-8 rounded-lg bg-primary text-on-primary text-xs font-bold flex items-center justify-center shadow-sm">1</button>
-                        <button class="h-7 w-7 sm:h-8 sm:w-8 rounded-lg text-on-surface-variant hover:bg-surface-container text-xs font-semibold flex items-center justify-center">2</button>
+                        <button type="button" title="Page 1" aria-label="Page 1" class="h-7 w-7 sm:h-8 sm:w-8 rounded-lg bg-primary text-on-primary text-xs font-bold flex items-center justify-center shadow-sm">1</button>
+                        <button type="button" title="Page 2" aria-label="Page 2" class="h-7 w-7 sm:h-8 sm:w-8 rounded-lg text-on-surface-variant hover:bg-surface-container text-xs font-semibold flex items-center justify-center">2</button>
                         <span class="text-on-surface-variant px-1">...</span>
-                        <button class="h-7 w-7 sm:h-8 sm:w-8 rounded-lg text-on-surface-variant hover:bg-surface-container text-xs font-semibold flex items-center justify-center">13</button>
+                        <button type="button" title="Page 13" aria-label="Page 13" class="h-7 w-7 sm:h-8 sm:w-8 rounded-lg text-on-surface-variant hover:bg-surface-container text-xs font-semibold flex items-center justify-center">13</button>
                     </div>
 
-                    <button title="Next Page" class="p-1.5 rounded-lg border border-outline-variant/80 bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors flex items-center justify-center shadow-sm">
+                    <button type="button" title="Next Page" aria-label="Next Page" class="p-1.5 rounded-lg border border-outline-variant/80 bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors flex items-center justify-center shadow-sm">
                         <span class="material-symbols-outlined text-[18px]">chevron_right</span>
                     </button>
-                    <button title="Last Page" class="p-1.5 rounded-lg border border-outline-variant/80 bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors flex items-center justify-center shadow-sm">
+                    <button type="button" title="Last Page" aria-label="Last Page" class="p-1.5 rounded-lg border border-outline-variant/80 bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors flex items-center justify-center shadow-sm">
                         <span class="material-symbols-outlined text-[18px]">last_page</span>
                     </button>
                 </div>

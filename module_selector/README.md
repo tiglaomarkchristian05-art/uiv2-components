@@ -1,13 +1,21 @@
 # ISMERS Module Selector
 
-This standalone component provides a dedicated page for selecting ISMERS subsystems and viewing their module dashboards.
+Standalone, responsive selector for the ISMERS subsystem hierarchy.
 
-Files:
-- `code.html` — standalone page for the module selector.
-- `script.js` — page-specific JavaScript that renders subsystem cards and dashboard details.
-- `../app.css` — shared stylesheet used by the project.
+## Features
 
-Usage:
-- Open `module_selector/code.html` from the main UI Hubs page.
-- Click any subsystem card to view modules exclusive to that subsystem.
-- Use the Back to UI Hubs button to return to the main hub list.
+- Renders the subsystem and module data from `../subsystems.js`.
+- Searches across subsystem titles, descriptions, categories, and module names.
+- Filters the directory by core, financial, operational, and analytics categories.
+- Expands each card to show its complete module inventory.
+- Opens the existing subsystem dashboard URL without changing its query format.
+- Includes keyboard focus states, an empty-search state, responsive layouts, and reduced-motion support.
+
+## Files
+
+- `code.html` — semantic page structure.
+- `module-selector.css` — component-scoped responsive styling.
+- `script.js` — data rendering, search, filters, and expansion behavior.
+- `screen.png` — preview used by the main UI Hubs gallery.
+
+Open `module_selector/code.html` and choose a subsystem to continue.

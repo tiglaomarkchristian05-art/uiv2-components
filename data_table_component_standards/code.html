@@ -1,697 +1,115 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html lang="en">
 <head>
-    <link href="../app.css" rel="stylesheet"/>
-    <script src="../app.js" defer></script>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Enterprise Material Data Grid Standards</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <style>
-        /* Component-Specific Responsive Layout Safeguards */
-        html, body {
-            max-width: 100vw !important;
-            overflow-x: hidden !important;
-            margin: 0 !important;
-        }
-        * {
-            box-sizing: border-box !important;
-        }
-        /* Mobile vs Desktop View Switching */
-        @media (max-width: 767px) {
-            .desktop-table-view {
-                display: none !important;
-            }
-            .mobile-card-view {
-                display: block !important;
-            }
-            .responsive-header,
-            .responsive-toolbar,
-            .responsive-selection-bar,
-            .responsive-footer {
-                flex-direction: column !important;
-                align-items: stretch !important;
-                width: 100% !important;
-            }
-            .responsive-btn-group {
-                width: 100% !important;
-                display: flex !important;
-                flex-wrap: wrap !important;
-                gap: 0.5rem !important;
-            }
-            .responsive-btn-group > button {
-                flex: 1 1 auto !important;
-                justify-content: center !important;
-            }
-            .responsive-search {
-                width: 100% !important;
-                max-width: 100% !important;
-            }
-        }
-        @media (min-width: 768px) {
-            .desktop-table-view {
-                display: block !important;
-            }
-            .mobile-card-view {
-                display: none !important;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data Table Component Standards</title>
+  <link rel="stylesheet" href="../app.css">
+  <link rel="stylesheet" href="data-table.css?v=1">
+  <script src="data-table.js?v=1" defer></script>
 </head>
-<body class="bg-surface-dim min-h-screen p-3 sm:p-6 md:p-10 font-body text-on-surface antialiased overflow-x-hidden w-full max-w-full">
-    <div class="w-full max-w-7xl mx-auto space-y-6 sm:space-y-8 min-w-0">
-        <!-- Component Header & Dynamic Module Guidelines -->
-        <header class="responsive-header flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-outline-variant/60 w-full max-w-full">
-            <div class="space-y-1.5 min-w-0 flex-1">
-                <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider font-label">
-                    <span class="material-symbols-outlined text-[16px]">view_list</span>
-                    Dynamic Grid Standard
-                </div>
-                <h1 class="text-xl sm:text-2xl md:text-3xl font-headline font-bold text-on-surface tracking-tight break-words">Enterprise Material Data Grid</h1>
-                <p class="text-on-surface-variant text-xs sm:text-sm md:text-base leading-relaxed break-words">
-                    A modular, highly reusable data grid template structured for dynamic multi-module data binding. Automatically adapts between desktop table layout and responsive mobile card layout.
-                </p>
-            </div>
-            <!-- Responsive Action Buttons -->
-            <div class="responsive-btn-group flex flex-wrap items-center gap-2 sm:gap-3 shrink-0">
-                <button type="button" title="View Component Specification" aria-label="View Component Specification" class="px-3.5 py-2 bg-surface-container-lowest text-on-surface border border-outline-variant/80 rounded-lg text-xs sm:text-sm font-medium hover:bg-surface-container transition-colors shadow-sm inline-flex items-center justify-center gap-1.5">
-                    <span class="material-symbols-outlined text-[18px]">code</span>
-                    Specification
-                </button>
-                <button type="button" title="Create New Enterprise Entity" aria-label="Create New Enterprise Entity" class="px-4 py-2 bg-primary text-on-primary rounded-lg text-xs sm:text-sm font-semibold hover:bg-primary/90 transition-colors shadow-sm inline-flex items-center justify-center gap-1.5">
-                    <span class="material-symbols-outlined text-[18px]">add_circle</span>
-                    New Entity
-                </button>
-            </div>
-        </header>
+<body class="data-table-page">
+  <main class="table-page-shell">
+    <header class="table-hero">
+      <p class="table-eyebrow"><span class="material-symbols-outlined">table_view</span>Component standard</p>
+      <h1>Data Table Component Standards</h1>
+      <p>A production-ready data grid pattern with combined search, filtering, sorting, selection, CRUD actions, column preferences, export, and responsive states.</p>
+    </header>
 
-        <!-- Dynamic Table Container Wrapper -->
-        <div class="bg-surface-container-lowest rounded-xl sm:rounded-2xl shadow-md border border-outline-variant/60 overflow-hidden w-full max-w-full min-w-0">
-            
-            <!-- 1. Contextual Selection Header -->
-            <div class="responsive-selection-bar bg-primary-container/20 border-b border-primary-container/30 p-3 sm:px-6 sm:py-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 w-full max-w-full">
-                <div class="flex items-center gap-2 sm:gap-3 min-w-0 flex-wrap">
-                    <span class="inline-flex items-center justify-center h-6 w-6 rounded-full bg-primary text-on-primary text-xs font-bold shrink-0">
-                        2
-                    </span>
-                    <span class="text-xs sm:text-sm font-semibold text-on-surface break-words">records selected across query</span>
-                </div>
-                <div class="responsive-btn-group flex flex-wrap items-center gap-3 sm:gap-4 w-full sm:w-auto">
-                    <button type="button" title="Export Selected Records as CSV/PDF" aria-label="Export Selected Records as CSV/PDF" class="px-4 py-2 text-xs sm:text-sm font-medium rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors border border-outline-variant inline-flex items-center justify-center gap-2 shadow-sm leading-none">
-                        <span class="material-symbols-outlined text-[18px] leading-none flex items-center justify-center">file_download</span>
-                        <span>Export</span>
-                    </button>
-                    <button type="button" title="Bulk Update Selected Records" aria-label="Bulk Update Selected Records" class="px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg bg-primary text-on-primary hover:bg-primary/90 transition-colors border border-primary inline-flex items-center justify-center gap-2 shadow-sm leading-none">
-                        <span class="material-symbols-outlined text-[18px] leading-none flex items-center justify-center">edit_note</span>
-                        <span>Bulk Update</span>
-                    </button>
-                    <button type="button" title="Delete Selected Records" aria-label="Delete Selected Records" class="px-4 py-2 text-xs sm:text-sm font-medium rounded-lg bg-error-container text-on-error-container hover:brightness-95 transition-colors border border-error/20 inline-flex items-center justify-center gap-2 shadow-sm leading-none">
-                        <span class="material-symbols-outlined text-[18px] leading-none flex items-center justify-center">delete</span>
-                        <span>Delete</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- 2. Primary Toolbar: Fully Responsive Search, Filters & Grid Controls -->
-            <div class="responsive-toolbar p-3 sm:p-5 border-b border-outline-variant/50 flex flex-col lg:flex-row justify-between items-stretch lg:items-center gap-4 bg-surface-container-lowest w-full max-w-full min-w-0">
-                <!-- Search & Active Filters -->
-                <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 flex-1 min-w-0">
-                    <div class="responsive-search relative w-full sm:w-72 md:w-80 shrink-0">
-                        <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant/70 text-[20px]">search</span>
-                        <input type="text" title="Search Records" aria-label="Search Records" placeholder="Filter by keyword or ID..." class="w-full pl-10 pr-4 py-2 rounded-xl border border-outline-variant bg-surface-container-low/50 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body"/>
-                    </div>
-                    
-                    <!-- Quick Filter Chips -->
-                    <div class="flex items-center gap-1.5 flex-wrap min-w-0">
-                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-primary/10 text-primary text-xs font-semibold border border-primary/20 shrink-0">
-                            <span class="material-symbols-outlined text-[14px]">check_circle</span>
-                            Status: Active
-                            <button type="button" title="Remove Status Filter" aria-label="Remove Status Filter" class="hover:text-primary/70 transition-colors inline-flex items-center">
-                                <span class="material-symbols-outlined text-[14px]">close</span>
-                            </button>
-                        </span>
-                    
-                        <button type="button" title="Add Filter Rule" aria-label="Add Filter Rule" class="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-semibold text-primary hover:bg-primary/5 transition-colors shrink-0">
-                            <span class="material-symbols-outlined text-[16px]">filter_alt</span>
-                            + Add Filter
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Grid Configuration & Global Module Actions -->
-                <div class="flex flex-wrap items-center justify-between sm:justify-end gap-2 border-t lg:border-t-0 pt-3 lg:pt-0 border-outline-variant/50 w-full lg:w-auto shrink-0">
-                    <div class="inline-flex rounded-lg border border-outline-variant/80 bg-surface-container-low/40 p-0.5 shrink-0">
-                        <button type="button" title="Comfortable View Density" aria-label="Comfortable View Density" class="p-1.5 rounded-md bg-surface-container-lowest text-primary shadow-sm flex items-center justify-center">
-                            <span class="material-symbols-outlined text-[18px]">table_rows</span>
-                        </button>
-                        <button type="button" title="Compact View Density" aria-label="Compact View Density" class="p-1.5 rounded-md text-on-surface-variant hover:text-on-surface flex items-center justify-center">
-                            <span class="material-symbols-outlined text-[18px]">reorder</span>
-                        </button>
-                    </div>
-                    
-                    <div class="responsive-btn-group flex items-center gap-1.5 flex-wrap">
-                        <button type="button" title="Configure Table Columns" aria-label="Configure Table Columns" class="px-2.5 sm:px-3 py-2 bg-surface-container-lowest text-on-surface border border-outline-variant rounded-lg text-xs font-medium hover:bg-surface-container transition-colors shadow-sm inline-flex items-center justify-center gap-1">
-                            <span class="material-symbols-outlined text-[16px]">view_column</span>
-                            <span>Columns</span>
-                        </button>
-
-                        <button type="button" title="Refresh Grid Data" aria-label="Refresh Grid Data" class="px-2.5 sm:px-3 py-2 bg-surface-container-lowest text-on-surface border border-outline-variant rounded-lg text-xs font-medium hover:bg-surface-container transition-colors shadow-sm inline-flex items-center justify-center gap-1">
-                            <span class="material-symbols-outlined text-[16px]">refresh</span>
-                            <span>Refresh</span>
-                        </button>
-
-                        <button type="button" title="Create New Record" aria-label="Create New Record" class="px-3 py-2 bg-primary text-on-primary rounded-lg text-xs font-semibold hover:bg-primary/90 transition-colors shadow-sm inline-flex items-center justify-center gap-1">
-                            <span class="material-symbols-outlined text-[16px]">add</span>
-                            <span>Create Record</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3A. MOBILE RESPONSIVE CARD VIEW (Visible on small mobile viewports < 768px) -->
-            <div class="mobile-card-view divide-y divide-outline-variant/60 bg-surface-container-lowest w-full max-w-full">
-                <!-- Mobile Card 1 -->
-                <div class="p-4 space-y-3 bg-primary/[0.03] w-full max-w-full">
-                    <div class="flex items-start justify-between gap-3">
-                        <div class="flex items-center gap-2.5 min-w-0">
-                            <input type="checkbox" checked="" class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4 shrink-0 cursor-pointer"/>
-                            <div class="h-9 w-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-bold text-xs border border-primary/20 shrink-0">
-                                MOD
-                            </div>
-                            <div class="min-w-0">
-                                <h4 class="font-semibold text-sm text-on-surface truncate">Order Processing Pipeline</h4>
-                                <span class="font-mono text-[11px] text-on-surface-variant">SYS-8821</span>
-                            </div>
-                        </div>
-                        <span class="status-badge status-badge-operational">
-                            Operational
-                        </span>
-                    </div>
-
-                    <div class="space-y-1 bg-surface-container-low/60 p-2.5 rounded-lg border border-outline-variant/40">
-                        <div class="flex justify-between text-xs">
-                            <span class="text-on-surface-variant font-medium">Allocation (Commerce Core)</span>
-                            <span class="font-semibold text-on-surface">86% (430/500)</span>
-                        </div>
-                        <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
-                            <div class="h-full bg-primary rounded-full" style="width: 86%;"></div>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center justify-between text-xs pt-1">
-                        <span class="text-on-surface-variant">Modified: Oct 24, 2026</span>
-                        <div class="flex items-center gap-1">
-                            <button type="button" title="Edit Record" aria-label="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
-                                <span class="material-symbols-outlined text-[18px]">edit</span>
-                            </button>
-                            <button type="button" title="View Details" aria-label="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
-                                <span class="material-symbols-outlined text-[18px]">visibility</span>
-                            </button>
-                            <button type="button" title="More Actions" aria-label="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
-                                <span class="material-symbols-outlined text-[18px]">more_vert</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Mobile Card 2 -->
-                <div class="p-4 space-y-3 w-full max-w-full">
-                    <div class="flex items-start justify-between gap-3">
-                        <div class="flex items-center gap-2.5 min-w-0">
-                            <input type="checkbox" checked="" class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4 shrink-0 cursor-pointer"/>
-                            <div class="h-9 w-9 rounded-xl bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-xs border border-outline-variant shrink-0">
-                                AUTH
-                            </div>
-                            <div class="min-w-0">
-                                <h4 class="font-semibold text-sm text-on-surface truncate">Identity & Access Gateway</h4>
-                                <span class="font-mono text-[11px] text-on-surface-variant">SYS-7042</span>
-                            </div>
-                        </div>
-                        <span class="status-badge status-badge-operational">
-                            Operational
-                        </span>
-                    </div>
-
-                    <div class="space-y-1 bg-surface-container-low/60 p-2.5 rounded-lg border border-outline-variant/40">
-                        <div class="flex justify-between text-xs">
-                            <span class="text-on-surface-variant font-medium">Allocation (Security)</span>
-                            <span class="font-semibold text-on-surface">42% (210/500)</span>
-                        </div>
-                        <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
-                            <div class="h-full bg-primary rounded-full" style="width: 42%;"></div>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center justify-between text-xs pt-1">
-                        <span class="text-on-surface-variant">Modified: Oct 23, 2026</span>
-                        <div class="flex items-center gap-1">
-                            <button type="button" title="Edit Record" aria-label="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
-                                <span class="material-symbols-outlined text-[18px]">edit</span>
-                            </button>
-                            <button type="button" title="View Details" aria-label="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
-                                <span class="material-symbols-outlined text-[18px]">visibility</span>
-                            </button>
-                            <button type="button" title="More Actions" aria-label="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
-                                <span class="material-symbols-outlined text-[18px]">more_vert</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Mobile Card 3 -->
-                <div class="p-4 space-y-3 w-full max-w-full">
-                    <div class="flex items-start justify-between gap-3">
-                        <div class="flex items-center gap-2.5 min-w-0">
-                            <input type="checkbox" class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4 shrink-0 cursor-pointer"/>
-                            <div class="h-9 w-9 rounded-xl bg-amber-500/10 text-amber-700 flex items-center justify-center font-bold text-xs border border-amber-500/20 shrink-0">
-                                SYNC
-                            </div>
-                            <div class="min-w-0">
-                                <h4 class="font-semibold text-sm text-on-surface truncate">Warehouse ERP Replication</h4>
-                                <span class="font-mono text-[11px] text-on-surface-variant">SYS-4190</span>
-                            </div>
-                        </div>
-                        <span class="status-badge status-badge-maintenance">
-                            Maintenance
-                        </span>
-                    </div>
-
-                    <div class="space-y-1 bg-surface-container-low/60 p-2.5 rounded-lg border border-outline-variant/40">
-                        <div class="flex justify-between text-xs">
-                            <span class="text-on-surface-variant font-medium">Allocation (Supply Chain)</span>
-                            <span class="font-semibold text-on-surface">94% (470/500)</span>
-                        </div>
-                        <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
-                            <div class="h-full bg-amber-500 rounded-full" style="width: 94%;"></div>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center justify-between text-xs pt-1">
-                        <span class="text-on-surface-variant">Modified: Oct 21, 2026</span>
-                        <div class="flex items-center gap-1">
-                            <button type="button" title="Edit Record" aria-label="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
-                                <span class="material-symbols-outlined text-[18px]">edit</span>
-                            </button>
-                            <button type="button" title="View Details" aria-label="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
-                                <span class="material-symbols-outlined text-[18px]">visibility</span>
-                            </button>
-                            <button type="button" title="More Actions" aria-label="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
-                                <span class="material-symbols-outlined text-[18px]">more_vert</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Mobile Card 4 -->
-                <div class="p-4 space-y-3 w-full max-w-full">
-                    <div class="flex items-start justify-between gap-3">
-                        <div class="flex items-center gap-2.5 min-w-0">
-                            <input type="checkbox" class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4 shrink-0 cursor-pointer"/>
-                            <div class="h-9 w-9 rounded-xl bg-surface-variant text-on-surface-variant flex items-center justify-center font-bold text-xs border border-outline-variant shrink-0">
-                                LOGS
-                            </div>
-                            <div class="min-w-0">
-                                <h4 class="font-semibold text-sm text-on-surface truncate">Legacy Telemetry Collector</h4>
-                                <span class="font-mono text-[11px] text-on-surface-variant">SYS-1093</span>
-                            </div>
-                        </div>
-                        <span class="status-badge status-badge-archived">
-                            Archived
-                        </span>
-                    </div>
-
-                    <div class="space-y-1 bg-surface-container-low/60 p-2.5 rounded-lg border border-outline-variant/40">
-                        <div class="flex justify-between text-xs">
-                            <span class="text-on-surface-variant font-medium">Allocation (Analytics)</span>
-                            <span class="font-semibold text-on-surface">0% (0/500)</span>
-                        </div>
-                        <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
-                            <div class="h-full bg-on-surface-variant/40 rounded-full" style="width: 0%;"></div>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center justify-between text-xs pt-1">
-                        <span class="text-on-surface-variant">Modified: Sep 15, 2026</span>
-                        <div class="flex items-center gap-1">
-                            <button type="button" title="Edit Record" aria-label="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
-                                <span class="material-symbols-outlined text-[18px]">edit</span>
-                            </button>
-                            <button type="button" title="View Details" aria-label="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
-                                <span class="material-symbols-outlined text-[18px]">visibility</span>
-                            </button>
-                            <button type="button" title="More Actions" aria-label="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
-                                <span class="material-symbols-outlined text-[18px]">more_vert</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3B. DESKTOP ENTERPRISE TABLE VIEW (Visible on screens >= 768px) -->
-            <div class="desktop-table-view w-full overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <!-- Column Header Row -->
-                    <thead class="bg-surface-container-low/80 border-b border-outline-variant/80 text-on-surface-variant select-none">
-                        <tr>
-                            <!-- Selection Checkbox Column -->
-                            <th scope="col" class="py-3.5 pl-6 pr-3 w-12 text-center">
-                                <input type="checkbox" title="Select All Records" aria-label="Select All Records" class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4 bg-surface-container-lowest cursor-pointer"/>
-                            </th>
-
-                            <!-- Sortable Primary Column: Entity / Identifier -->
-                            <th scope="col" class="py-3.5 px-4 text-xs font-bold uppercase tracking-wider font-label cursor-pointer hover:bg-surface-container/60 transition-colors group">
-                                <div class="flex items-center gap-1.5 text-on-surface">
-                                    Entity / Identifier
-                                    <span class="material-symbols-outlined text-[16px] text-primary">arrow_upward</span>
-                                </div>
-                            </th>
-
-                            <!-- Sortable Metadata Column: Reference ID -->
-                            <th scope="col" class="py-3.5 px-4 text-xs font-bold uppercase tracking-wider font-label cursor-pointer hover:bg-surface-container/60 transition-colors group">
-                                <div class="flex items-center justify-between gap-2 whitespace-nowrap">
-                                    <span>Reference ID</span>
-                                    <span class="material-symbols-outlined text-[16px] shrink-0 opacity-0 group-hover:opacity-100 transition-opacity text-on-surface-variant">unfold_more</span>
-                                </div>
-                            </th>
-
-                            <!-- Categorical Status Column -->
-                            <th scope="col" class="py-3.5 px-4 text-xs font-bold uppercase tracking-wider font-label cursor-pointer hover:bg-surface-container/60 transition-colors group">
-                                <div class="flex items-center justify-between gap-2 whitespace-nowrap">
-                                    <span>Status</span>
-                                    <span class="material-symbols-outlined text-[16px] shrink-0 opacity-0 group-hover:opacity-100 transition-opacity text-on-surface-variant">unfold_more</span>
-                                </div>
-                            </th>
-
-                            <!-- Numeric / Metric Column -->
-                            <th scope="col" class="py-3.5 px-4 text-xs font-bold uppercase tracking-wider font-label cursor-pointer hover:bg-surface-container/60 transition-colors group">
-                                <div class="flex items-center justify-between gap-2 whitespace-nowrap">
-                                    <span>Allocation</span>
-                                    <span class="material-symbols-outlined text-[16px] shrink-0 opacity-0 group-hover:opacity-100 transition-opacity text-on-surface-variant">unfold_more</span>
-                                </div>
-                            </th>
-
-                            <!-- Date / Timestamp Column -->
-                            <th scope="col" class="py-3.5 px-4 text-xs font-bold uppercase tracking-wider font-label cursor-pointer hover:bg-surface-container/60 transition-colors group">
-                                <div class="flex items-center justify-between gap-2 whitespace-nowrap">
-                                    <span>Last Modified</span>
-                                    <span class="material-symbols-outlined text-[16px] shrink-0 opacity-0 group-hover:opacity-100 transition-opacity text-on-surface-variant">unfold_more</span>
-                                </div>
-                            </th>
-
-                            <!-- Actions -->
-                            <th scope="col" class="py-3.5 pl-3 pr-6 text-xs font-bold uppercase tracking-wider font-label text-right">
-                                Actions
-                            </th>
-                        </tr>
-                    </thead>
-
-                    <!-- Dynamic Table Rows -->
-                    <tbody class="divide-y divide-outline-variant/60 bg-surface-container-lowest font-body text-sm">
-                        <!-- Row 1: Selected & Active State -->
-                        <tr class="hover:bg-primary/5 transition-colors group bg-primary/[0.03]">
-                            <td class="py-3.5 pl-6 pr-3 text-center">
-                                <input type="checkbox" checked="" class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4 cursor-pointer"/>
-                            </td>
-                            <td class="py-3.5 px-4 whitespace-nowrap">
-                                <div class="flex items-center gap-3">
-                                    <div class="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-bold text-sm border border-primary/20 shrink-0">
-                                        MOD
-                                    </div>
-                                    <div>
-                                        <div class="font-semibold text-on-surface group-hover:text-primary transition-colors">Order Processing Pipeline</div>
-                                        <div class="text-xs text-on-surface-variant flex items-center gap-1 mt-0.5">
-                                            <span class="material-symbols-outlined text-[14px]">account_tree</span>
-                                            Module: Commerce Core
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="py-3.5 px-4 whitespace-nowrap">
-                                <span class="font-mono text-xs font-medium px-2 py-1 rounded bg-surface-container text-on-surface border border-outline-variant/60">
-                                    SYS-8821
-                                </span>
-                            </td>
-                            <td class="py-3.5 px-4 whitespace-nowrap">
-                                <span class="status-badge status-badge-operational">
-                                    Operational
-                                </span>
-                            </td>
-                            <td class="py-3.5 px-4 whitespace-nowrap">
-                                <div class="w-28 space-y-1">
-                                    <div class="flex justify-between text-xs">
-                                        <span class="font-medium text-on-surface">86%</span>
-                                        <span class="text-on-surface-variant">430 / 500</span>
-                                    </div>
-                                    <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
-                                        <div class="h-full bg-primary rounded-full" style="width: 86%;"></div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="py-3.5 px-4 whitespace-nowrap text-on-surface-variant">
-                                <div class="font-medium text-on-surface">Oct 24, 2026</div>
-                                <div class="text-xs text-on-surface-variant">14:22 UTC</div>
-                            </td>
-                            <td class="py-3.5 pl-3 pr-6 whitespace-nowrap text-right">
-                                <div class="inline-flex items-center gap-0.5">
-                                    <button type="button" title="Edit Record" aria-label="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
-                                        <span class="material-symbols-outlined text-[18px]">edit</span>
-                                    </button>
-                                    <button type="button" title="View Details" aria-label="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
-                                        <span class="material-symbols-outlined text-[18px]">visibility</span>
-                                    </button>
-                                    <button type="button" title="More Actions" aria-label="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center">
-                                        <span class="material-symbols-outlined text-[18px]">more_vert</span>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <!-- Row 2: Standard Row -->
-                        <tr class="hover:bg-surface-container-low transition-colors group">
-                            <td class="py-3.5 pl-6 pr-3 text-center">
-                                <input type="checkbox" checked="" class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4 cursor-pointer"/>
-                            </td>
-                            <td class="py-3.5 px-4 whitespace-nowrap">
-                                <div class="flex items-center gap-3">
-                                    <div class="h-10 w-10 rounded-xl bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-sm border border-outline-variant shrink-0">
-                                        AUTH
-                                    </div>
-                                    <div>
-                                        <div class="font-semibold text-on-surface group-hover:text-primary transition-colors">Identity & Access Gateway</div>
-                                        <div class="text-xs text-on-surface-variant flex items-center gap-1 mt-0.5">
-                                            <span class="material-symbols-outlined text-[14px]">shield</span>
-                                            Module: Security
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="py-3.5 px-4 whitespace-nowrap">
-                                <span class="font-mono text-xs font-medium px-2 py-1 rounded bg-surface-container text-on-surface border border-outline-variant/60">
-                                    SYS-7042
-                                </span>
-                            </td>
-                            <td class="py-3.5 px-4 whitespace-nowrap">
-                                <span class="status-badge status-badge-operational">
-                                    Operational
-                                </span>
-                            </td>
-                            <td class="py-3.5 px-4 whitespace-nowrap">
-                                <div class="w-28 space-y-1">
-                                    <div class="flex justify-between text-xs">
-                                        <span class="font-medium text-on-surface">42%</span>
-                                        <span class="text-on-surface-variant">210 / 500</span>
-                                    </div>
-                                    <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
-                                        <div class="h-full bg-primary rounded-full" style="width: 42%;"></div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="py-3.5 px-4 whitespace-nowrap text-on-surface-variant">
-                                <div class="font-medium text-on-surface">Oct 23, 2026</div>
-                                <div class="text-xs text-on-surface-variant">09:15 UTC</div>
-                            </td>
-                            <td class="py-3.5 pl-3 pr-6 whitespace-nowrap text-right">
-                                <div class="inline-flex items-center gap-0.5">
-                                    <button type="button" title="Edit Record" aria-label="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
-                                        <span class="material-symbols-outlined text-[18px]">edit</span>
-                                    </button>
-                                    <button type="button" title="View Details" aria-label="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
-                                        <span class="material-symbols-outlined text-[18px]">visibility</span>
-                                    </button>
-                                    <button type="button" title="More Actions" aria-label="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center">
-                                        <span class="material-symbols-outlined text-[18px]">more_vert</span>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <!-- Row 3: Warning / Maintenance State -->
-                        <tr class="hover:bg-surface-container-low transition-colors group">
-                            <td class="py-3.5 pl-6 pr-3 text-center">
-                                <input type="checkbox" class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4 bg-surface-container-lowest cursor-pointer"/>
-                            </td>
-                            <td class="py-3.5 px-4 whitespace-nowrap">
-                                <div class="flex items-center gap-3">
-                                    <div class="h-10 w-10 rounded-xl bg-amber-500/10 text-amber-700 flex items-center justify-center font-bold text-sm border border-amber-500/20 shrink-0">
-                                        SYNC
-                                    </div>
-                                    <div>
-                                        <div class="font-semibold text-on-surface group-hover:text-primary transition-colors">Warehouse ERP Replication</div>
-                                        <div class="text-xs text-on-surface-variant flex items-center gap-1 mt-0.5">
-                                            <span class="material-symbols-outlined text-[14px]">sync</span>
-                                            Module: Supply Chain
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="py-3.5 px-4 whitespace-nowrap">
-                                <span class="font-mono text-xs font-medium px-2 py-1 rounded bg-surface-container text-on-surface border border-outline-variant/60">
-                                    SYS-4190
-                                </span>
-                            </td>
-                            <td class="py-3.5 px-4 whitespace-nowrap">
-                                <span class="status-badge status-badge-maintenance">
-                                    Maintenance
-                                </span>
-                            </td>
-                            <td class="py-3.5 px-4 whitespace-nowrap">
-                                <div class="w-28 space-y-1">
-                                    <div class="flex justify-between text-xs">
-                                        <span class="font-medium text-on-surface">94%</span>
-                                        <span class="text-on-surface-variant">470 / 500</span>
-                                    </div>
-                                    <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
-                                        <div class="h-full bg-amber-500 rounded-full" style="width: 94%;"></div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="py-3.5 px-4 whitespace-nowrap text-on-surface-variant">
-                                <div class="font-medium text-on-surface">Oct 21, 2026</div>
-                                <div class="text-xs text-on-surface-variant">18:40 UTC</div>
-                            </td>
-                            <td class="py-3.5 pl-3 pr-6 whitespace-nowrap text-right">
-                                <div class="inline-flex items-center gap-0.5">
-                                    <button type="button" title="Edit Record" aria-label="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
-                                        <span class="material-symbols-outlined text-[18px]">edit</span>
-                                    </button>
-                                    <button type="button" title="View Details" aria-label="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
-                                        <span class="material-symbols-outlined text-[18px]">visibility</span>
-                                    </button>
-                                    <button type="button" title="More Actions" aria-label="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center">
-                                        <span class="material-symbols-outlined text-[18px]">more_vert</span>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <!-- Row 4: Inactive / Suspended State -->
-                        <tr class="hover:bg-surface-container-low transition-colors group">
-                            <td class="py-3.5 pl-6 pr-3 text-center">
-                                <input type="checkbox" class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4 bg-surface-container-lowest cursor-pointer"/>
-                            </td>
-                            <td class="py-3.5 px-4 whitespace-nowrap">
-                                <div class="flex items-center gap-3">
-                                    <div class="h-10 w-10 rounded-xl bg-surface-variant text-on-surface-variant flex items-center justify-center font-bold text-sm border border-outline-variant shrink-0">
-                                        LOGS
-                                    </div>
-                                    <div>
-                                        <div class="font-semibold text-on-surface group-hover:text-primary transition-colors">Legacy Telemetry Collector</div>
-                                        <div class="text-xs text-on-surface-variant flex items-center gap-1 mt-0.5">
-                                            <span class="material-symbols-outlined text-[14px]">archive</span>
-                                            Module: Analytics
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="py-3.5 px-4 whitespace-nowrap">
-                                <span class="font-mono text-xs font-medium px-2 py-1 rounded bg-surface-container text-on-surface border border-outline-variant/60">
-                                    SYS-1093
-                                </span>
-                            </td>
-                            <td class="py-3.5 px-4 whitespace-nowrap">
-                                <span class="status-badge status-badge-archived">
-                                    Archived
-                                </span>
-                            </td>
-                            <td class="py-3.5 px-4 whitespace-nowrap">
-                                <div class="w-28 space-y-1">
-                                    <div class="flex justify-between text-xs">
-                                        <span class="font-medium text-on-surface">0%</span>
-                                        <span class="text-on-surface-variant">0 / 500</span>
-                                    </div>
-                                    <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
-                                        <div class="h-full bg-on-surface-variant/40 rounded-full" style="width: 0%;"></div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="py-3.5 px-4 whitespace-nowrap text-on-surface-variant">
-                                <div class="font-medium text-on-surface">Sep 15, 2026</div>
-                                <div class="text-xs text-on-surface-variant">11:00 UTC</div>
-                            </td>
-                            <td class="py-3.5 pl-3 pr-6 whitespace-nowrap text-right">
-                                <div class="inline-flex items-center gap-0.5">
-                                    <button type="button" title="Edit Record" aria-label="Edit Record" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
-                                        <span class="material-symbols-outlined text-[18px]">edit</span>
-                                    </button>
-                                    <button type="button" title="View Details" aria-label="View Details" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors flex items-center justify-center">
-                                        <span class="material-symbols-outlined text-[18px]">visibility</span>
-                                    </button>
-                                    <button type="button" title="More Actions" aria-label="More Actions" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center">
-                                        <span class="material-symbols-outlined text-[18px]">more_vert</span>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- 4. Material Grid Paginator & Footer -->
-            <div class="responsive-footer bg-surface-container-lowest p-3 sm:px-6 sm:py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-outline-variant/60 w-full max-w-full">
-                <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-6 w-full sm:w-auto">
-                    <!-- Rows Per Page Dropdown -->
-                    <div class="flex items-center gap-2 text-xs text-on-surface-variant font-label">
-                        <span>Rows per page:</span>
-                        <select class="bg-surface-container-low border border-outline-variant rounded-lg px-2 py-1 text-xs font-semibold text-on-surface focus:outline-none focus:ring-2 focus:ring-primary">
-                            <option>10</option>
-                            <option>25</option>
-                            <option>50</option>
-                            <option>100</option>
-                        </select>
-                    </div>
-
-                    <div class="text-xs text-on-surface-variant font-label text-center sm:text-left">
-                        Showing <span class="font-semibold text-on-surface">1</span> – <span class="font-semibold text-on-surface">4</span> of <span class="font-semibold text-on-surface">128</span>
-                    </div>
-                </div>
-
-                <!-- Pagination Navigation Controls -->
-                <div class="flex items-center justify-center gap-1 w-full sm:w-auto">
-                    <button type="button" title="First Page" aria-label="First Page" class="p-1.5 rounded-lg border border-outline-variant/80 bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors disabled:opacity-40 flex items-center justify-center shadow-sm">
-                        <span class="material-symbols-outlined text-[18px]">first_page</span>
-                    </button>
-                    <button type="button" title="Previous Page" aria-label="Previous Page" class="p-1.5 rounded-lg border border-outline-variant/80 bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors disabled:opacity-40 flex items-center justify-center shadow-sm">
-                        <span class="material-symbols-outlined text-[18px]">chevron_left</span>
-                    </button>
-
-                    <div class="flex items-center gap-1 px-1">
-                        <button type="button" title="Page 1" aria-label="Page 1" class="h-7 w-7 sm:h-8 sm:w-8 rounded-lg bg-primary text-on-primary text-xs font-bold flex items-center justify-center shadow-sm">1</button>
-                        <button type="button" title="Page 2" aria-label="Page 2" class="h-7 w-7 sm:h-8 sm:w-8 rounded-lg text-on-surface-variant hover:bg-surface-container text-xs font-semibold flex items-center justify-center">2</button>
-                        <span class="text-on-surface-variant px-1">...</span>
-                        <button type="button" title="Page 13" aria-label="Page 13" class="h-7 w-7 sm:h-8 sm:w-8 rounded-lg text-on-surface-variant hover:bg-surface-container text-xs font-semibold flex items-center justify-center">13</button>
-                    </div>
-
-                    <button type="button" title="Next Page" aria-label="Next Page" class="p-1.5 rounded-lg border border-outline-variant/80 bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors flex items-center justify-center shadow-sm">
-                        <span class="material-symbols-outlined text-[18px]">chevron_right</span>
-                    </button>
-                    <button type="button" title="Last Page" aria-label="Last Page" class="p-1.5 rounded-lg border border-outline-variant/80 bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors flex items-center justify-center shadow-sm">
-                        <span class="material-symbols-outlined text-[18px]">last_page</span>
-                    </button>
-                </div>
-            </div>
-
+    <section class="table-card" aria-labelledby="records-heading">
+      <div class="table-card-header">
+        <div class="table-card-title">
+          <span class="table-card-icon material-symbols-outlined" aria-hidden="true">group</span>
+          <div><p class="table-eyebrow">Directory overview</p><h2>Team records</h2><p>Manage access, roles, departments, and account status from one workspace.</p></div>
         </div>
+        <div class="table-overview" aria-label="Record overview">
+          <div><span class="overview-icon material-symbols-outlined">database</span><span><strong id="overview-total">0</strong><small>Total records</small></span></div>
+          <div><span class="overview-icon success material-symbols-outlined">verified</span><span><strong id="overview-active">0</strong><small>Active users</small></span></div>
+          <div><span class="overview-icon info material-symbols-outlined">domain</span><span><strong id="overview-departments">0</strong><small>Departments</small></span></div>
+        </div>
+      </div>
+      <div class="table-toolbar">
+        <div class="search-wrap">
+          <span class="material-symbols-outlined" aria-hidden="true">search</span>
+          <label class="sr-only" for="table-search">Search records</label>
+          <input id="table-search" type="search" placeholder="Search all visible columns…" autocomplete="off">
+          <button id="clear-search" class="search-clear" type="button" aria-label="Clear search" hidden><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="toolbar-actions">
+          <div class="popover-wrap">
+            <button id="filter-toggle" class="icon-button" type="button" aria-label="Open filters" aria-expanded="false" aria-controls="filter-panel"><span class="material-symbols-outlined">filter_list</span></button>
+            <div id="filter-panel" class="table-popover filter-panel" hidden>
+              <div class="popover-heading"><strong>Filter records</strong><button id="clear-filters" type="button">Clear all</button></div>
+              <label>Status<select id="filter-status"><option value="">All statuses</option><option>Active</option><option>Pending</option><option>Inactive</option></select></label>
+              <label>Role<select id="filter-role"><option value="">All roles</option></select></label>
+              <label>Department<select id="filter-department"><option value="">All departments</option></select></label>
+              <label>Last active<select id="filter-date"><option value="">Any time</option><option value="today">Today</option><option value="week">Past 7 days</option><option value="month">Past 30 days</option><option value="older">Older than 30 days</option></select></label>
+              <label class="switch-row"><input id="filter-enabled" type="checkbox"><span>Active records only</span></label>
+            </div>
+          </div>
+          <button id="add-filter" class="text-button" type="button"><span class="material-symbols-outlined">add</span>Add Filter</button>
+          <div class="popover-wrap">
+            <button id="column-toggle" class="icon-button" type="button" aria-label="Choose visible columns" aria-expanded="false" aria-controls="column-panel"><span class="material-symbols-outlined">view_column</span></button>
+            <div id="column-panel" class="table-popover column-panel" hidden><div class="popover-heading"><strong>Visible columns</strong></div><div id="column-options"></div><p>At least one data column must remain visible.</p></div>
+          </div>
+          <button id="export-csv" class="button button-secondary" type="button"><span class="material-symbols-outlined">download</span><span>Export CSV</span></button>
+          <button id="new-record" class="button button-primary" type="button"><span class="material-symbols-outlined">add</span><span>New Record</span></button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <div id="filter-chips" class="filter-chips" aria-label="Active filters"></div>
+        <p id="match-count" role="status" aria-live="polite"></p>
+      </div>
+
+      <div id="bulk-toolbar" class="bulk-toolbar" hidden>
+        <strong id="selection-count">0 selected</strong>
+        <div><button type="button" data-bulk="activate">Activate</button><button type="button" data-bulk="deactivate">Deactivate</button><button type="button" data-bulk="export">Export Selected</button><button type="button" data-bulk="delete" class="danger">Delete Selected</button></div>
+      </div>
+
+      <div id="table-state" class="table-state" role="status" aria-live="polite" hidden></div>
+      <div id="table-scroll" class="table-scroll">
+        <table id="records-table">
+          <caption id="records-heading" class="sr-only">User records</caption>
+          <thead><tr>
+            <th class="select-column" scope="col"><input id="select-all" type="checkbox" aria-label="Select all records on this page"></th>
+            <th scope="col" data-column="name"><button class="sort-button" type="button" data-sort="name">User <span class="material-symbols-outlined">unfold_more</span></button></th>
+            <th scope="col" data-column="role"><button class="sort-button" type="button" data-sort="role">Role <span class="material-symbols-outlined">unfold_more</span></button></th>
+            <th scope="col" data-column="department"><button class="sort-button" type="button" data-sort="department">Department <span class="material-symbols-outlined">unfold_more</span></button></th>
+            <th scope="col" data-column="status"><button class="sort-button" type="button" data-sort="status">Status <span class="material-symbols-outlined">unfold_more</span></button></th>
+            <th scope="col" data-column="lastActive"><button class="sort-button" type="button" data-sort="lastActive">Last Active <span class="material-symbols-outlined">unfold_more</span></button></th>
+            <th class="actions-column" scope="col"><span class="sr-only">Actions</span></th>
+          </tr></thead>
+          <tbody id="records-body"></tbody>
+        </table>
+      </div>
+
+      <div class="table-footer">
+        <div class="rows-control"><label for="rows-per-page">Rows per page</label><select id="rows-per-page"><option>5</option><option selected>10</option><option>25</option><option>50</option></select></div>
+        <p id="pagination-summary"></p>
+        <nav id="pagination" class="table-pagination" aria-label="Table pagination"></nav>
+      </div>
+    </section>
+  </main>
+
+  <div id="record-modal" class="table-modal" role="dialog" aria-modal="true" aria-labelledby="record-modal-title" hidden>
+    <div class="modal-panel"><div class="modal-header"><div><p class="table-eyebrow">Record editor</p><h2 id="record-modal-title">New Record</h2></div><button class="icon-button" type="button" data-close-modal aria-label="Close record form"><span class="material-symbols-outlined">close</span></button></div>
+      <form id="record-form" novalidate>
+        <input id="record-id" type="hidden">
+        <div class="form-grid">
+          <label class="full-field">Name<input id="record-name" name="name" type="text" maxlength="80" autocomplete="name" required><small class="field-error" data-error="name"></small></label>
+          <label class="full-field">Email<input id="record-email" name="email" type="email" maxlength="120" autocomplete="email" required><small class="field-error" data-error="email"></small></label>
+          <label>Role<select id="record-role" name="role" required><option value="">Select role</option><option>Administrator</option><option>Editor</option><option>Manager</option><option>Viewer</option><option>Analyst</option></select><small class="field-error" data-error="role"></small></label>
+          <label>Department<select id="record-department" name="department" required><option value="">Select department</option><option>IT</option><option>Marketing</option><option>Sales</option><option>Finance</option><option>Operations</option><option>Human Resources</option></select><small class="field-error" data-error="department"></small></label>
+          <label>Status<select id="record-status" name="status" required><option>Active</option><option>Pending</option><option>Inactive</option></select><small class="field-error" data-error="status"></small></label>
+          <label>Last Active<input id="record-last-active" name="lastActive" type="date" required><small class="field-error" data-error="lastActive"></small></label>
+        </div>
+        <div class="modal-actions"><button class="button button-secondary" type="button" data-close-modal>Cancel</button><button class="button button-primary" type="submit">Save Record</button></div>
+      </form>
     </div>
+  </div>
+  <div id="detail-modal" class="table-modal" role="dialog" aria-modal="true" aria-labelledby="detail-title" hidden><div class="modal-panel"><div class="modal-header"><h2 id="detail-title">Record Details</h2><button class="icon-button" type="button" data-close-modal aria-label="Close details"><span class="material-symbols-outlined">close</span></button></div><div id="detail-content" class="detail-grid"></div><div class="modal-actions"><button class="button button-primary" type="button" data-close-modal>Done</button></div></div></div>
+  <div id="confirm-modal" class="table-modal" role="alertdialog" aria-modal="true" aria-labelledby="confirm-title" hidden><div class="modal-panel modal-small"><div class="confirm-icon material-symbols-outlined">delete_forever</div><h2 id="confirm-title">Confirm deletion</h2><p id="confirm-message"></p><div class="modal-actions"><button class="button button-secondary" type="button" data-close-modal>Cancel</button><button id="confirm-action" class="button button-danger" type="button">Delete</button></div></div></div>
+  <div id="table-toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
 </body>
 </html>

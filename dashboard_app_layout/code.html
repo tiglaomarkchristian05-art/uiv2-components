@@ -1,324 +1,142 @@
 <!DOCTYPE html>
-
-<html lang="en"><head>
-<link href="../app.css?v=3" rel="stylesheet"/>
-<script src="../subsystems.js?v=2" defer></script>
-<script src="../app.js?v=5" defer></script>
-<script src="dashboard.js?v=5" defer></script>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ISMERS Dashboard</title>
+  <link rel="stylesheet" href="../app.css?v=3">
+  <link rel="stylesheet" href="dashboard.css?v=1">
+  <script src="../subsystems.js?v=3" defer></script>
+  <script src="dashboard.js?v=11" defer></script>
 </head>
-<body class="bg-background text-on-background font-body h-screen flex flex-row overflow-hidden">
-<!-- Mobile Backdrop overlay -->
-<div id="sidebar-backdrop" class="fixed top-16 bottom-0 left-0 right-0 md:inset-0 bg-gray-900/50 backdrop-blur-md z-40 hidden md:hidden transition-opacity duration-300 opacity-0"></div>
-<!-- Left Sidebar (Collapsible on Desktop, Slide-over on Mobile) -->
-<aside id="app-sidebar" class="dashboard-sidebar fixed md:static top-16 bottom-0 md:inset-y-0 left-0 z-50 bg-white flex flex-col h-[calc(100vh-4rem)] md:h-full shrink-0 shadow-xl md:shadow-none transition-all duration-300 ease-in-out overflow-hidden w-72 border-r border-slate-200 -translate-x-full md:translate-x-0 opacity-100">
-    <div class="px-5 pt-6 pb-5 border-b border-slate-200">
-        <div class="sidebar-brand-card rounded-[2rem] p-6 flex flex-col items-center text-center gap-3">
-            <span class="sidebar-brand-icon inline-flex items-center justify-center w-14 h-14 rounded-[1.75rem] bg-slate-100 text-primary text-2xl shadow-sm">
-                <span class="material-symbols-outlined">account_balance</span>
-            </span>
-            <p id="sidebar-brand-title" class="text-sm font-semibold text-slate-950 truncate">Subsystem</p>
-            <p id="sidebar-brand-category" class="text-xs text-slate-500 mt-1 truncate">Select a subsystem</p>
-        </div>
+<body class="dashboard-page">
+  <div id="sidebar-backdrop" class="dash-backdrop" aria-hidden="true"></div>
+
+  <aside id="app-sidebar" class="dashboard-sidebar" aria-label="Primary navigation">
+    <div class="sidebar-brand">
+      <button id="module-selector-trigger" class="sidebar-brand-card" type="button" aria-haspopup="dialog" aria-label="Change module">
+        <span class="sidebar-brand-icon material-symbols-outlined" aria-hidden="true">calendar_month</span>
+        <span class="sidebar-brand-copy">
+          <strong id="sidebar-brand-title">Client Management</strong>
+          <small id="sidebar-brand-category">Core Transaction 1</small>
+        </span>
+        <span class="material-symbols-outlined sidebar-brand-change" aria-hidden="true">unfold_more</span>
+      </button>
     </div>
-    <nav class="flex-1 overflow-y-auto px-5 py-6 space-y-3">
-        <a id="sidebar-dashboard-link" class="sidebar-main-link active" href="#">
-            <span class="sidebar-main-link-icon material-symbols-outlined">dashboard</span>
-            <span class="font-label font-medium text-sm">Dashboard</span>
-        </a>
-        <div id="sidebar-subsystem-nav-panel" class="sidebar-subsystem-nav-panel">
-            <nav id="sidebar-subsystem-modules-nav" class="sidebar-subsystem-modules"></nav>
-        </div>
+    <nav class="sidebar-nav" aria-label="Dashboard navigation">
+      <a id="sidebar-dashboard-link" class="sidebar-main-link active" href="#dashboard-content" aria-current="page" data-tooltip="Dashboard">
+        <span class="sidebar-main-link-icon material-symbols-outlined" aria-hidden="true">dashboard</span>
+        <span class="sidebar-label">Dashboard</span>
+      </a>
+      <div id="sidebar-subsystem-nav-panel" class="sidebar-subsystem-nav-panel">
+        <p class="sidebar-section-label sidebar-label">Module tools</p>
+        <nav id="sidebar-subsystem-modules-nav" class="sidebar-subsystem-modules" aria-label="Module tools"></nav>
+      </div>
     </nav>
-    <div class="sidebar-profile-footer px-5 pb-6 pt-4 mt-auto">
-        <div class="sidebar-profile-card">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&amp;auto=format&amp;fit=crop&amp;q=80" alt="Admin" class="w-11 h-11 rounded-2xl object-cover border border-slate-200">
-            <div class="ml-3 min-w-0">
-                <p class="text-sm font-semibold text-slate-950 truncate">Admin User</p>
-                <p class="text-xs text-slate-500 truncate">admin@example.com</p>
+    <div class="sidebar-profile-footer">
+      <button class="sidebar-profile-card" type="button" data-profile-action="View Profile" data-tooltip="Admin User">
+        <span class="profile-avatar">AU</span>
+        <span class="sidebar-profile-copy sidebar-label"><strong>Admin User</strong><small>admin@example.com</small></span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="dashboard-frame">
+    <header class="dashboard-topbar">
+      <div class="topbar-start">
+        <button id="desktop-sidebar-toggle" class="icon-button" type="button" aria-controls="app-sidebar" aria-expanded="true" aria-label="Collapse sidebar">
+          <span id="sidebar-toggle-icon" class="material-symbols-outlined" aria-hidden="true">menu_open</span>
+        </button>
+        <div class="topbar-context">
+          <strong>ISMERS Operations</strong>
+          <span class="topbar-datetime"><span id="current-date"></span><span aria-hidden="true">•</span><time id="current-time" datetime="">--:--:-- --</time></span>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <div class="dropdown-wrap">
+          <button id="notification-toggle" class="icon-button notification-button" type="button" aria-expanded="false" aria-controls="notification-menu" aria-label="Notifications, 3 unread">
+            <span class="material-symbols-outlined" aria-hidden="true">notifications</span><span class="notification-dot">3</span>
+          </button>
+          <div id="notification-menu" class="dash-dropdown notification-menu" role="menu" hidden>
+            <div class="dropdown-heading"><strong>Notifications</strong><button type="button" id="mark-read">Mark all read</button></div>
+            <button type="button" role="menuitem" class="notification-item"><span class="notice-icon warning material-symbols-outlined">warning</span><span><strong>Schedule conflict detected</strong><small>BSIT 3A · 8 minutes ago</small></span></button>
+            <button type="button" role="menuitem" class="notification-item"><span class="notice-icon material-symbols-outlined">meeting_room</span><span><strong>Room 202 is available</strong><small>Today at 1:00 PM</small></span></button>
+            <button type="button" role="menuitem" class="notification-item"><span class="notice-icon success material-symbols-outlined">task_alt</span><span><strong>Schedule approved</strong><small>BSCS 2B · Yesterday</small></span></button>
+          </div>
+        </div>
+        <div class="dropdown-wrap">
+          <button id="profile-dropdown-toggle" class="profile-toggle" type="button" aria-expanded="false" aria-controls="profile-dropdown-menu">
+            <span class="profile-avatar">AU</span><span class="profile-meta"><strong>Admin User</strong><small>Administrator</small></span><span class="material-symbols-outlined">expand_more</span>
+          </button>
+          <div id="profile-dropdown-menu" class="dash-dropdown profile-menu" role="menu" hidden>
+            <button type="button" role="menuitem" data-profile-action="View Profile"><span class="material-symbols-outlined">person</span>View Profile</button>
+            <button type="button" role="menuitem" data-profile-action="Account Settings"><span class="material-symbols-outlined">settings</span>Account Settings</button>
+            <button type="button" role="menuitem" id="sign-out-action" class="danger-menu-item"><span class="material-symbols-outlined">logout</span>Sign Out</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="dashboard-content" class="dashboard-main" tabindex="-1">
+      <div class="dashboard-container">
+        <section class="dashboard-welcome" aria-labelledby="dashboard-heading">
+          <div class="welcome-copy">
+            <nav class="dashboard-breadcrumb" aria-label="Breadcrumb"><a href="../index.html">UI Hubs</a><span>/</span><span id="breadcrumb-category">Client Management</span><span>/</span><span aria-current="page">Dashboard</span></nav>
+            <p class="welcome-kicker"><span class="material-symbols-outlined">auto_awesome</span>Operations overview</p>
+            <h1 id="dashboard-heading">Welcome back, Admin</h1>
+            <p id="dashboard-copy">Here’s what’s happening in Client Management today.</p>
+          </div>
+          <div class="welcome-actions">
+            <span id="welcome-date" class="welcome-date"></span>
+            <button id="change-module" class="button button-ghost" type="button"><span class="material-symbols-outlined">swap_horiz</span>Change Module</button>
+            <button id="export-report" class="button button-ghost" type="button"><span class="material-symbols-outlined">download</span>Export Report</button>
+            <button id="new-transaction" class="button button-light" type="button"><span class="material-symbols-outlined">add</span>New Transaction</button>
+          </div>
+        </section>
+
+        <section aria-labelledby="summary-title">
+          <div class="section-heading"><div><p class="section-eyebrow">Live overview</p><h2 id="summary-title">Dashboard summary</h2></div><span id="data-status" class="data-status" role="status">Updated just now</span></div>
+          <div id="dashboard-stats-grid" class="stats-grid" aria-live="polite"></div>
+        </section>
+
+        <section aria-labelledby="monitoring-title">
+          <div class="section-heading"><div><p class="section-eyebrow">Performance</p><h2 id="monitoring-title">Monitoring</h2></div></div>
+          <div id="dashboard-charts" class="monitoring-grid">
+            <article id="dashboard-chart-overview" class="dashboard-card"></article>
+            <article id="dashboard-chart-breakdown" class="dashboard-card"></article>
+          </div>
+        </section>
+
+        <div class="dashboard-lower-grid">
+          <section class="dashboard-activity-card" aria-labelledby="activity-title">
+            <div class="card-heading"><div><p class="section-eyebrow">Audit trail</p><h2 id="activity-title">Recent Activity</h2></div><button id="activity-view-all" class="text-button" type="button">View All <span class="material-symbols-outlined">arrow_forward</span></button></div>
+            <div id="activity-state" class="component-state" role="status" hidden></div>
+            <div id="activity-table-wrap" class="activity-table-wrap">
+              <table class="activity-table">
+                <thead><tr><th scope="col">Activity</th><th scope="col">Status</th><th scope="col">Timestamp</th><th scope="col"><span class="sr-only">Actions</span></th></tr></thead>
+                <tbody id="dashboard-activity-tbody"></tbody>
+              </table>
             </div>
+            <div class="activity-footer"><p id="activity-count"></p><div class="pagination"><button id="activity-prev" type="button">Previous</button><span id="activity-page" aria-live="polite"></span><button id="activity-next" type="button">Next</button></div></div>
+          </section>
+
+          <section id="dashboard-quick-actions" class="dashboard-quick-card" aria-labelledby="quick-title">
+            <div class="card-heading"><div><p class="section-eyebrow">Shortcuts</p><h2 id="quick-title">Quick Actions</h2></div></div>
+            <div id="dashboard-quick-actions-list" class="quick-action-grid"></div>
+          </section>
         </div>
-    </div>
-</aside>
-<!-- Main Content Wrapper -->
-<div class="flex-1 flex flex-col h-full overflow-hidden relative">
-<!-- TopNavBar (Adapted from JSON) -->
-<header class="bg-surface/80 backdrop-blur-md shadow-sm border-b border-outline-variant/30 flex justify-between items-center h-16 px-6 w-full z-30 shrink-0">
-<div class="flex items-center gap-3">
-<!-- Small Logo and Separator (Responsive across all screen sizes) -->
-<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f1f5f9'/%3E%3Cpath d='M10 16a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm12 6H10l4-5 2.5 3 2-2.5 3.5 4.5z' fill='%23cbd5e1'/%3E%3C/svg%3E" alt="Logo" class="w-8 h-8 rounded-lg object-cover border border-outline-variant/30 shadow-2xs shrink-0">
-<span class="text-outline-variant font-light select-none">|</span>
-<!-- Responsive Sidebar Toggle Button -->
-<button id="desktop-sidebar-toggle" type="button" class="flex items-center justify-center p-2 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low focus:outline-none transition border border-outline-variant/30 shrink-0 min-w-[2.5rem] min-h-[2.5rem]" title="Close Sidebar">
-<span class="material-symbols-outlined text-xl" id="sidebar-toggle-icon">menu_open</span>
-</button>
-</div>
 
-<!-- Right Side: Profile Dropdown -->
-<div class="relative flex items-center">
-<button id="profile-dropdown-toggle" type="button" class="flex items-center gap-3 p-1.5 rounded-full hover:bg-surface-container-low transition-colors focus:outline-none border border-transparent hover:border-outline-variant/30 cursor-pointer" aria-expanded="false" title="Account Menu">
-<div class="w-9 h-9 rounded-full bg-primary-container/30 border border-primary/20 flex items-center justify-center text-primary font-bold text-sm shadow-2xs shrink-0">
-AU
-</div>
-<div class="hidden md:flex flex-col text-left mr-1">
-<span class="font-label font-semibold text-sm text-on-surface leading-tight">Admin User</span>
-<span class="text-xs text-on-surface-variant font-light">Administrator</span>
-</div>
-<span class="material-symbols-outlined text-on-surface-variant text-sm hidden sm:inline-block">expand_more</span>
-</button>
+        <footer class="dashboard-footer"><p><strong>ISMERS Dashboard</strong> © <span id="footer-year"></span> Enterprise Operations.</p><nav aria-label="Footer"><button type="button" data-demo="Privacy Policy">Privacy</button><button type="button" data-demo="Help Center">Help Center</button><button type="button" data-demo="Support">Support</button></nav></footer>
+      </div>
+    </main>
+  </div>
 
-<!-- Profile Dropdown Menu Container -->
-<div id="profile-dropdown-menu" class="absolute right-0 top-14 w-60 bg-surface rounded-2xl shadow-xl border border-outline-variant/30 py-2 z-50 transition-all duration-200 hidden opacity-0 scale-95 origin-top-right">
-<div class="px-4 py-3 border-b border-outline-variant/20 md:hidden">
-<p class="text-sm font-semibold text-on-surface">Admin User</p>
-<p class="text-xs text-on-surface-variant truncate">admin@example.com</p>
-</div>
-<div class="px-4 py-2 hidden md:block">
-<p class="text-xs font-medium text-on-surface-variant uppercase tracking-wider">Account</p>
-</div>
-<a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-on-surface hover:bg-surface-container-low hover:text-primary transition-colors">
-<span class="material-symbols-outlined text-lg text-on-surface-variant">person</span>
-<span class="font-medium">My Profile</span>
-</a>
-<a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-on-surface hover:bg-surface-container-low hover:text-primary transition-colors">
-<span class="material-symbols-outlined text-lg text-on-surface-variant">manage_accounts</span>
-<span class="font-medium">Account Settings</span>
-</a>
-<a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-on-surface hover:bg-surface-container-low hover:text-primary transition-colors">
-<span class="material-symbols-outlined text-lg text-on-surface-variant">notifications</span>
-<span class="font-medium">Notifications</span>
-</a>
-<div class="my-1 border-t border-outline-variant/20"></div>
-<a href="#" onclick="openDashboardModal('dash-logout-modal'); return false;" class="flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors font-medium cursor-pointer">
-<span class="material-symbols-outlined text-lg">logout</span>
-<span>Log Out</span>
-</a>
-</div>
-</div>
-</header>
-<!-- Main Scrollable Area -->
-<main class="flex-1 overflow-y-auto bg-surface-container-lowest p-6 md:p-8">
-<div class="max-w-7xl mx-auto space-y-8">
-<div class="flex flex-col gap-6">
-    <nav aria-label="Breadcrumb" class="flex flex-wrap items-center gap-2 text-sm text-on-surface-variant">
-        <a href="../index.html" class="hover:text-primary transition-colors">UI Hubs</a>
-        <span>/</span>
-        <span id="breadcrumb-category">Financial Management</span>
-        <span>/</span>
-        <span class="text-primary font-semibold">Dashboard</span>
-    </nav>
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-            <h1 class="text-3xl font-headline font-bold text-on-surface" id="dashboard-heading">Welcome back, Admin</h1>
-            <p class="text-on-surface-variant text-sm mt-2" id="dashboard-copy">Here’s what’s happening in Financial Management today.</p>
-        </div>
-        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-            <button id="export-report" class="btn-secondary dashboard-action-button">
-                <span class="material-symbols-outlined">file_download</span>
-                Export Report
-            </button>
-            <button id="new-transaction" class="btn-primary dashboard-action-button">
-                <span class="material-symbols-outlined">add</span>
-                New Transaction
-            </button>
-        </div>
-    </div>
-</div>
-<!-- Stat Cards Grid -->
-<div id="dashboard-stats-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
-<div id="dashboard-charts" class="grid grid-cols-1 lg:grid-cols-[1.8fr_1fr] gap-6">
-    <div id="dashboard-chart-overview" class="dashboard-card bg-white shadow-sm border border-slate-200"></div>
-    <div id="dashboard-chart-breakdown" class="dashboard-card bg-white shadow-sm border border-slate-200"></div>
-</div>
-<div class="grid grid-cols-1 xl:grid-cols-[2.5fr_1fr] gap-6">
-    <div class="bg-white rounded-[1.75rem] shadow-sm border border-slate-200 overflow-hidden">
-        <div class="px-6 py-4 border-b border-outline-variant/30 flex justify-between items-center">
-            <h2 class="text-lg font-headline font-semibold text-on-surface">Recent Activity</h2>
-            <button class="text-sm font-medium text-primary hover:text-on-primary-fixed-variant transition-colors flex items-center gap-1">
-                View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
-            </button>
-        </div>
-        <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="bg-surface-container-low/50">
-                        <th class="px-6 py-3 text-xs font-semibold text-on-surface-variant uppercase tracking-wider border-b border-outline-variant/30 cursor-pointer hover:bg-surface-container-low transition-colors group">
-                            <div class="flex items-center gap-1">Activity <span class="material-symbols-outlined text-xs opacity-0 group-hover:opacity-100 transition-opacity">arrow_downward</span></div>
-                        </th>
-                        <th class="px-6 py-3 text-xs font-semibold text-on-surface-variant uppercase tracking-wider border-b border-outline-variant/30 cursor-pointer hover:bg-surface-container-low transition-colors group">
-                            <div class="flex items-center gap-1">Status <span class="material-symbols-outlined text-xs opacity-0 group-hover:opacity-100 transition-opacity">arrow_downward</span></div>
-                        </th>
-                        <th class="px-6 py-3 text-xs font-semibold text-on-surface-variant uppercase tracking-wider border-b border-outline-variant/30 cursor-pointer hover:bg-surface-container-low transition-colors group">
-                            <div class="flex items-center gap-1">Time <span class="material-symbols-outlined text-xs opacity-0 group-hover:opacity-100 transition-opacity">arrow_downward</span></div>
-                        </th>
-                        <th class="px-6 py-3 text-xs font-semibold text-on-surface-variant uppercase tracking-wider border-b border-outline-variant/30">Action</th>
-                    </tr>
-                </thead>
-                <tbody id="dashboard-activity-tbody" class="divide-y divide-outline-variant/20"></tbody>
-            </table>
-        </div>
-        <div class="px-6 py-4 border-t border-outline-variant/30 flex items-center justify-between bg-surface-container-low/30">
-            <p class="text-sm text-on-surface-variant">Showing <span class="font-medium">1</span> to <span class="font-medium">3</span> of <span class="font-medium">45</span> results</p>
-            <div class="flex gap-2">
-                <button class="px-3 py-1 rounded border border-outline-variant/50 text-sm font-medium text-on-surface-variant hover:bg-surface-variant transition-colors disabled:opacity-50">Previous</button>
-                <button class="px-3 py-1 rounded border border-outline-variant/50 text-sm font-medium text-on-surface-variant hover:bg-surface-variant transition-colors">Next</button>
-            </div>
-        </div>
-    </div>
-    <div id="dashboard-quick-actions" class="bg-surface rounded-xl shadow-sm border border-outline-variant/30 p-6">
-        <div class="flex items-center justify-between mb-4">
-            <h2 class="text-lg font-headline font-semibold text-on-surface">Quick Actions</h2>
-        </div>
-        <div id="dashboard-quick-actions-list" class="space-y-3"></div>
-    </div>
-</div>
-</div>
-<!-- Footer from JSON -->
-<footer class="mt-12 w-full py-8 border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-4 text-label-sm">
-<div class="flex items-center gap-2">
-<span class="text-lg font-headline font-bold text-on-surface">Dashboard</span>
-<span class="text-on-surface-variant">© 2026 Dashboard Application. All rights reserved.</span>
-</div>
-<div class="flex gap-4">
-<a class="text-on-surface-variant hover:underline hover:text-primary transition-colors" href="#">Privacy Policy</a>
-<a class="text-on-surface-variant hover:underline hover:text-primary transition-colors" href="#">Terms of Service</a>
-<a class="text-on-surface-variant hover:underline hover:text-primary transition-colors" href="#">Github</a>
-<a class="text-on-surface-variant hover:underline hover:text-primary transition-colors" href="#">Support</a>
-</div>
-</footer>
-</main>
-</div>
-
-<!-- Dashboard Confirmation Modals -->
-<div id="dash-delete-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-200" onclick="if(event.target.id==='dash-delete-modal') closeDashboardModal('dash-delete-modal')">
-<div class="bg-surface rounded-3xl max-w-md w-full p-6 md:p-7 shadow-2xl border border-outline-variant/30 relative transform scale-95 transition-transform duration-200" onclick="event.stopPropagation()">
-<button type="button" onclick="closeDashboardModal('dash-delete-modal')" class="absolute top-5 right-5 p-1.5 rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" title="Close modal">
-<span class="material-symbols-outlined text-xl">close</span>
-</button>
-<div class="flex items-center gap-3 mb-5">
-<div class="w-12 h-12 rounded-2xl bg-red-100 border border-red-200 flex items-center justify-center text-red-600 shrink-0">
-<span class="material-symbols-outlined text-2xl">delete_forever</span>
-</div>
-<div>
-<h3 class="text-lg font-headline font-bold text-on-surface">Delete User Record</h3>
-<p class="text-xs text-on-surface-variant">Permanent action &bull; Revoke access</p>
-</div>
-</div>
-<p class="text-sm text-on-surface leading-relaxed mb-6">
-Are you sure you want to delete the account for <strong id="delete-target-name" class="font-semibold text-red-600">Sarah Jenkins</strong>? All historical logs and permissions will be purged.
-</p>
-<div class="flex justify-end gap-3 pt-4 border-t border-outline-variant/20">
-<button type="button" onclick="closeDashboardModal('dash-delete-modal')" class="px-4 py-2 rounded-xl border border-outline-variant/50 text-on-surface font-medium text-sm hover:bg-surface-container-low transition-colors cursor-pointer">
-Cancel
-</button>
-<button type="button" onclick="confirmDashboardAction('dash-delete-modal', 'User record deleted successfully!')" class="flex items-center gap-1.5 px-5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-semibold text-sm shadow-md shadow-red-600/20 transition-all cursor-pointer">
-<span class="material-symbols-outlined text-base">delete</span>
-<span>Delete Permanently</span>
-</button>
-</div>
-</div>
-</div>
-
-<div id="dash-logout-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-200" onclick="if(event.target.id==='dash-logout-modal') closeDashboardModal('dash-logout-modal')">
-<div class="bg-surface rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-outline-variant/30 relative transform scale-95 transition-transform duration-200 text-center" onclick="event.stopPropagation()">
-<button type="button" onclick="closeDashboardModal('dash-logout-modal')" class="absolute top-4 right-4 p-1.5 rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" title="Close modal">
-<span class="material-symbols-outlined text-xl">close</span>
-</button>
-<div class="w-14 h-14 shrink-0 rounded-full bg-surface-container-high border border-outline-variant/40 flex items-center justify-center text-on-surface mx-auto mb-4">
-<span class="material-symbols-outlined text-3xl text-on-surface-variant">logout</span>
-</div>
-<h3 class="text-xl font-headline font-bold text-on-surface mb-2">Sign Out of Session?</h3>
-<p class="text-sm text-on-surface-variant leading-relaxed mb-6">
-Are you sure you want to log out of your current administration session?
-</p>
-<div class="flex gap-3">
-<button type="button" onclick="closeDashboardModal('dash-logout-modal')" class="flex-1 px-4 py-2.5 rounded-xl border border-outline-variant/50 text-on-surface font-medium text-sm hover:bg-surface-container-low transition-colors cursor-pointer">
-Cancel
-</button>
-<button type="button" onclick="confirmDashboardAction('dash-logout-modal', 'Signed out successfully.')" class="flex-1 px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-semibold text-sm shadow-md shadow-red-600/20 transition-all cursor-pointer">
-Sign Out
-</button>
-</div>
-</div>
-</div>
-
-<div id="dash-toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
-
-<script>
-function openDashboardModal(modalId, targetName) {
-    if (targetName && document.getElementById('delete-target-name')) {
-        document.getElementById('delete-target-name').textContent = targetName;
-    }
-    const modal = document.getElementById(modalId);
-    if (!modal) return;
-    modal.classList.remove('hidden');
-    void modal.offsetWidth;
-    modal.classList.remove('opacity-0');
-    modal.classList.add('opacity-100');
-    const box = modal.firstElementChild;
-    if (box) {
-        box.classList.remove('scale-95');
-        box.classList.add('scale-100');
-    }
-    document.body.style.overflow = 'hidden';
-}
-
-function closeDashboardModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (!modal) return;
-    modal.classList.remove('opacity-100');
-    modal.classList.add('opacity-0');
-    const box = modal.firstElementChild;
-    if (box) {
-        box.classList.remove('scale-100');
-        box.classList.add('scale-95');
-    }
-    setTimeout(() => {
-        modal.classList.add('hidden');
-        document.body.style.overflow = '';
-    }, 200);
-}
-
-function confirmDashboardAction(modalId, toastMessage) {
-    closeDashboardModal(modalId);
-    const container = document.getElementById('dash-toast-container');
-    if (!container) return;
-    const toast = document.createElement('div');
-    toast.className = 'bg-surface text-on-surface px-5 py-3.5 rounded-2xl shadow-xl border border-outline-variant/40 flex items-center gap-3 transform translate-y-4 opacity-0 transition-all duration-300 pointer-events-auto';
-    toast.innerHTML = `
-        <div class="w-7 h-7 rounded-full bg-green-100 text-green-700 flex items-center justify-center shrink-0">
-            <span class="material-symbols-outlined text-sm font-bold">check</span>
-        </div>
-        <span class="text-sm font-medium">${toastMessage}</span>
-    `;
-    container.appendChild(toast);
-    void toast.offsetWidth;
-    toast.classList.remove('translate-y-4', 'opacity-0');
-    setTimeout(() => {
-        toast.classList.add('translate-y-4', 'opacity-0');
-        setTimeout(() => toast.remove(), 300);
-    }, 3500);
-}
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        ['dash-delete-modal', 'dash-logout-modal'].forEach(id => {
-            const modal = document.getElementById(id);
-            if (modal && !modal.classList.contains('hidden')) {
-                closeDashboardModal(id);
-            }
-        });
-    }
-});
-</script>
-</body></html>
-
-
-
-
-
+  <div id="module-modal" class="dash-modal" role="dialog" aria-modal="true" aria-labelledby="module-modal-title" hidden>
+    <div class="modal-panel modal-wide"><div class="modal-header"><div><p class="section-eyebrow">Workspace</p><h2 id="module-modal-title">Choose a module</h2><p>Select an area to update this dashboard.</p></div><button class="icon-button" type="button" data-close-modal aria-label="Close module selector"><span class="material-symbols-outlined">close</span></button></div><div id="module-grid" class="module-grid"></div></div>
+  </div>
+  <div id="action-modal" class="dash-modal" role="dialog" aria-modal="true" aria-labelledby="action-modal-title" hidden>
+    <div class="modal-panel"><div class="modal-header"><div><p class="section-eyebrow">Demo action</p><h2 id="action-modal-title">Action</h2></div><button class="icon-button" type="button" data-close-modal aria-label="Close dialog"><span class="material-symbols-outlined">close</span></button></div><div id="action-modal-body" class="modal-body"></div><div class="modal-actions"><button class="button button-secondary" type="button" data-close-modal>Cancel</button><button id="action-confirm" class="button button-primary" type="button">Continue</button></div></div>
+  </div>
+  <div id="dash-toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>

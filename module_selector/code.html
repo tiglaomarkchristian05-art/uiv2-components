@@ -1,33 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Module Selector</title>
-    <link href="../app.css" rel="stylesheet" />
-    <script src="../app.js" defer></script>
-    <script src="../subsystems.js" defer></script>
-    <script src="script.js" defer></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ISMERS Module Selector</title>
+  <link rel="stylesheet" href="../app.css">
+  <link rel="stylesheet" href="module-selector.css?v=1">
+  <script src="../subsystems.js" defer></script>
+  <script src="script.js?v=2" defer></script>
 </head>
-<body class="bg-surface-container-low min-h-screen text-on-surface font-body">
-    <main class="module-selector-page">
-        <div class="container module-selector-shell">
-            <div class="module-selector-header">
-                <div>
-                    <p class="eyebrow">ISMERS Module Selector</p>
-                    <h1 class="module-selector-title">Select a Subsystem Dashboard</h1>
-                    <p class="module-selector-copy">Browse each ISMERS subsystem, open its dashboard, and review only the modules that belong to the selected hub.</p>
-                </div>
-                <div class="module-selector-actions">
-                    <a href="../index.html" class="btn btn-view">Back to UI Hubs</a>
-                </div>
-            </div>
+<body class="selector-page">
+  <header class="selector-topbar">
+    <a class="selector-brand" href="../index.html" aria-label="ISMERS UI Hubs home">
+      <span class="brand-mark material-symbols-outlined" aria-hidden="true">hub</span>
+      <span><strong>ISMERS</strong><small>Service Management & Enterprise Resource System</small></span>
+    </a>
+    <a href="../index.html" class="back-link"><span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>Back to UI Hubs</a>
+  </header>
 
-            <section class="module-selector-grid" id="module-selector-grid"></section>
+  <main class="selector-main">
+    <section class="selector-hero" aria-labelledby="selector-title">
+      <div class="hero-copy">
+        <p class="selector-eyebrow"><span class="material-symbols-outlined" aria-hidden="true">account_tree</span>Enterprise workspace</p>
+        <h1 id="selector-title">Select a Subsystem Dashboard</h1>
+        <p>Choose an operational area to access its dashboard and the modules assigned to that ISMERS subsystem.</p>
+      </div>
+      <div class="system-summary" aria-label="System summary">
+        <div><strong id="subsystem-total">10</strong><span>Subsystems</span></div>
+        <div><strong id="module-total">59</strong><span>Modules</span></div>
+        <div><strong>1</strong><span>Connected system</span></div>
+      </div>
+    </section>
 
-        </div>
-    </main>
+    <section class="selector-controls" aria-label="Module selector controls">
+      <div class="selector-search">
+        <span class="material-symbols-outlined" aria-hidden="true">search</span>
+        <label class="sr-only" for="module-search">Search subsystems and modules</label>
+        <input id="module-search" type="search" placeholder="Search subsystems or modules…" autocomplete="off">
+        <button id="clear-module-search" type="button" aria-label="Clear search" hidden><span class="material-symbols-outlined">close</span></button>
+      </div>
+      <div id="category-filters" class="category-filters" aria-label="Filter by category"></div>
+    </section>
+
+    <div class="selector-results-heading">
+      <div><p class="selector-eyebrow">System directory</p><h2>ISMERS subsystems</h2></div>
+      <p id="selector-result-count" role="status" aria-live="polite"></p>
+    </div>
+
+    <section class="module-selector-grid" id="module-selector-grid" aria-live="polite"></section>
+    <div id="selector-empty-state" class="selector-empty" hidden>
+      <span class="material-symbols-outlined">search_off</span><h2>No matching subsystem</h2><p>Try another keyword or reset the category filter.</p><button id="reset-selector" type="button">Clear search and filters</button>
+    </div>
+  </main>
+
+  <footer class="selector-footer"><p><strong>ISMERS</strong> · Integrated enterprise operations</p><p>Choose a subsystem to continue to its dashboard.</p></footer>
 </body>
 </html>

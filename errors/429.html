@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>429 Too Many Requests - Standard Breeze UI</title>
+    <meta name="description" content="Production-ready 429 Too Many Requests rate limit page template styled with pure CSS using universal app.css design tokens.">
+    <!-- Reference to universal design system -->
+    <link rel="stylesheet" href="../app.css">
+    <script src="../app.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body class="bg-surface-container-low min-h-screen flex flex-col items-center justify-center p-4 selection:bg-amber-600/10 selection:text-amber-700 font-body text-on-surface">
+
+    <!-- Top Bar Navigation for Standalone Prototype -->
+    <div class="absolute top-6 left-6 z-10">
+        <a href="code.html" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface shadow-sm border border-outline-variant/30 text-sm font-medium text-on-surface-variant hover:text-primary hover:border-primary/40 transition-all">
+            <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+            <span>All Error States</span>
+        </a>
+    </div>
+
+    <!-- 429 Error Main Card Container -->
+    <main class="w-full max-w-xl bg-surface-container-lowest rounded-2xl shadow-xl border border-outline-variant/30 p-8 md:p-12 text-center relative overflow-hidden">
+        
+        <!-- Decorative Background Glow -->
+        <div class="absolute -top-24 -right-24 w-48 h-48 bg-amber-50 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-amber-50 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Status Badge -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-semibold uppercase tracking-wider mb-8">
+            <span class="w-2 h-2 rounded-full bg-amber-600 animate-pulse"></span>
+            <span>HTTP 429 &bull; Rate Limit Exceeded</span>
+        </div>
+
+        <!-- Hero Icon -->
+        <div class="mx-auto w-24 h-24 rounded-2xl bg-amber-50 border-2 border-amber-200 flex items-center justify-center mb-6 shadow-sm text-amber-600 transform hover:scale-105 transition-transform duration-300">
+            <span class="material-symbols-outlined text-[52px]" style="font-variation-settings: 'FILL' 1, 'wght' 500;">speed</span>
+        </div>
+
+        <!-- Error Headline -->
+        <h1 class="text-3xl md:text-4xl font-headline font-black text-on-surface mb-3 tracking-tight">
+            Too Many Requests
+        </h1>
+
+        <!-- Error Description -->
+        <p class="text-on-surface-variant text-base md:text-lg max-w-md mx-auto mb-8 leading-relaxed">
+            You have triggered our automated rate protection by sending too many requests in a short time. Please pause for a moment.
+        </p>
+
+        <!-- Rate Limit Countdown Widget -->
+        <div class="bg-surface-container-low border border-outline-variant/40 rounded-xl p-5 mb-8 max-w-md mx-auto">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-sm font-semibold text-on-surface flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[18px] text-amber-600">timer</span>
+                    Cooldown Timer
+                </span>
+                <span id="timer-badge" class="text-xs font-mono font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded">
+                    00:<span id="countdown-sec">30</span>s
+                </span>
+            </div>
+            <!-- Progress Bar -->
+            <div class="w-full bg-surface-variant/40 h-2 rounded-full overflow-hidden mb-3">
+                <div id="progress-bar" class="bg-amber-600 h-full rounded-full transition-all duration-1000" style="width: 100%;"></div>
+            </div>
+            <p id="timer-msg" class="text-xs text-on-surface-variant text-left">
+                Rate limit resets automatically when the timer expires. You may retry then.
+            </p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <button id="retry-btn" onclick="window.location.reload();" disabled class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-surface-variant text-on-surface-variant font-medium shadow-sm cursor-not-allowed transition-all duration-200">
+                <span class="material-symbols-outlined text-[20px]">refresh</span>
+                <span id="retry-text">Retry (Wait 30s)</span>
+            </button>
+            <a href="../index.html" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-surface border border-outline-variant text-on-surface font-medium hover:bg-surface-container-low active:scale-[0.98] transition-all duration-200">
+                <span class="material-symbols-outlined text-[20px]">home</span>
+                <span>Return to Hub</span>
+            </a>
+            <button onclick="alert('API Quotas: Free Plan allows 60 requests/minute. Pro Plan allows 1,000 requests/minute. Contact Sales to upgrade.');" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-primary hover:bg-primary-container/10 font-medium transition-colors text-sm">
+                <span class="material-symbols-outlined text-[18px]">info</span>
+                <span>View API Quotas</span>
+            </button>
+        </div>
+
+        <!-- Footer Help Text -->
+        <div class="mt-8 pt-6 border-t border-outline-variant/20 text-xs text-on-surface-variant/80 flex items-center justify-center gap-4">
+            <span>Limit: 60 req/min</span>
+            <span>&bull;</span>
+            <span>IP: 192.0.2.14</span>
+            <span>&bull;</span>
+            <a href="#" class="text-primary hover:underline font-medium">Upgrade Plan</a>
+        </div>
+
+    </main>
+
+    <!-- Page Footer -->
+    <footer class="mt-8 text-center text-xs text-on-surface-variant/70">
+        &copy; 2026 Breeze UI Architecture &bull; Universal app.css Styled Error Prototype
+    </footer>
+
+    <script>
+        // Interactive Countdown Script
+        let timeLeft = 30;
+        const countEl = document.getElementById('countdown-sec');
+        const progEl = document.getElementById('progress-bar');
+        const retryBtn = document.getElementById('retry-btn');
+        const retryText = document.getElementById('retry-text');
+        const timerBadge = document.getElementById('timer-badge');
+        const timerMsg = document.getElementById('timer-msg');
+
+        const interval = setInterval(() => {
+            timeLeft--;
+            if (countEl) countEl.textContent = (timeLeft < 10 ? '0' : '') + timeLeft;
+            if (progEl) progEl.style.width = (timeLeft / 30 * 100) + '%';
+            if (retryText) retryText.textContent = `Retry (Wait ${timeLeft}s)`;
+
+            if (timeLeft <= 0) {
+                clearInterval(interval);
+                if (progEl) progEl.style.width = '0%';
+                if (retryBtn) {
+                    retryBtn.disabled = false;
+                    retryBtn.className = "w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-on-primary font-medium shadow-md hover:bg-primary-hover active:scale-[0.98] transition-all duration-200 cursor-pointer animate-bounce";
+                }
+                if (retryText) retryText.textContent = "Retry Now";
+                if (timerBadge) {
+                    timerBadge.className = "text-xs font-mono font-bold bg-green-100 text-green-800 px-2 py-0.5 rounded";
+                    timerBadge.textContent = "READY";
+                }
+                if (timerMsg) {
+                    timerMsg.className = "text-xs text-green-600 font-medium text-left";
+                    timerMsg.textContent = "Rate limit cleared! You can now send new requests.";
+                }
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

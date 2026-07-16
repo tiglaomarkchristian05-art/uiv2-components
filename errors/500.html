@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>500 Internal Server Error - Standard Breeze UI</title>
+    <meta name="description" content="Production-ready 500 Internal Server Error page template styled with pure CSS using universal app.css design tokens.">
+    <!-- Reference to universal design system -->
+    <link rel="stylesheet" href="../app.css">
+    <script src="../app.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        @keyframes pulse-subtle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(0.98); }
+        }
+        .animate-pulse-subtle {
+            animation: pulse-subtle 3s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-low min-h-screen flex flex-col items-center justify-center p-4 selection:bg-error/10 selection:text-error font-body text-on-surface">
+
+    <!-- Top Bar Navigation for Standalone Prototype -->
+    <div class="absolute top-6 left-6 z-10">
+        <a href="code.html" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface shadow-sm border border-outline-variant/30 text-sm font-medium text-on-surface-variant hover:text-primary hover:border-primary/40 transition-all">
+            <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+            <span>All Error States</span>
+        </a>
+    </div>
+
+    <!-- 500 Error Main Card Container -->
+    <main class="w-full max-w-xl bg-surface-container-lowest rounded-2xl shadow-xl border border-outline-variant/30 p-8 md:p-12 text-center relative overflow-hidden">
+        
+        <!-- Decorative Background Glow -->
+        <div class="absolute -top-24 -right-24 w-48 h-48 bg-error/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-error/5 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Status Badge -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 border border-red-200 text-red-700 text-xs font-semibold uppercase tracking-wider mb-8 animate-pulse-subtle">
+            <span class="w-2 h-2 rounded-full bg-red-600"></span>
+            <span>HTTP 500 &bull; Critical Exception</span>
+        </div>
+
+        <!-- Hero Icon -->
+        <div class="mx-auto w-24 h-24 rounded-2xl bg-red-50 border-2 border-red-100 flex items-center justify-center mb-6 shadow-sm text-red-600 transform hover:rotate-6 transition-transform duration-300">
+            <span class="material-symbols-outlined text-[52px]" style="font-variation-settings: 'FILL' 1, 'wght' 500;">cloud_off</span>
+        </div>
+
+        <!-- Error Headline -->
+        <h1 class="text-3xl md:text-4xl font-headline font-black text-on-surface mb-3 tracking-tight">
+            Internal Server Error
+        </h1>
+
+        <!-- Error Description -->
+        <p class="text-on-surface-variant text-base md:text-lg max-w-md mx-auto mb-8 leading-relaxed">
+            Oops! Something went wrong on our end. We're tracking the issue and our system engineers have already been notified.
+        </p>
+
+        <!-- Technical Diagnostic Box -->
+        <div class="bg-surface-container-low border border-outline-variant/40 rounded-xl p-4 mb-8 text-left max-w-md mx-auto font-mono text-xs">
+            <div class="flex items-center justify-between border-b border-outline-variant/30 pb-2 mb-2 text-on-surface-variant">
+                <span class="font-semibold flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[16px] text-red-600">terminal</span>
+                    Diagnostic Report
+                </span>
+                <span class="text-[11px] bg-red-100 text-red-700 px-2 py-0.5 rounded font-sans font-medium">Logged</span>
+            </div>
+            <div class="space-y-1 text-on-surface-variant/90">
+                <p><span class="text-outline">Error ID:</span> #ERR-500-8924-SYS</p>
+                <p><span class="text-outline">Timestamp:</span> <span id="error-time">2026-07-04 21:38:00 UTC</span></p>
+                <p><span class="text-outline">Path:</span> /api/v2/module/execute-transaction</p>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <button onclick="window.location.reload();" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-on-primary font-medium shadow-md hover:bg-primary-hover active:scale-[0.98] transition-all duration-200">
+                <span class="material-symbols-outlined text-[20px]">refresh</span>
+                <span>Reload Page</span>
+            </button>
+            <a href="../index.html" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-surface border border-outline-variant text-on-surface font-medium hover:bg-surface-container-low active:scale-[0.98] transition-all duration-200">
+                <span class="material-symbols-outlined text-[20px]">home</span>
+                <span>Return to Hub</span>
+            </a>
+            <button onclick="alert('Support ticket #SRV-992 raised automatically. An engineer will investigate shortly.');" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-on-surface-variant hover:text-primary hover:bg-primary-container/10 font-medium transition-colors text-sm">
+                <span class="material-symbols-outlined text-[18px]">support_agent</span>
+                <span>Report Issue</span>
+            </button>
+        </div>
+
+        <!-- Footer Help Text -->
+        <div class="mt-8 pt-6 border-t border-outline-variant/20 text-xs text-on-surface-variant/80">
+            If the problem persists, check our <a href="#" class="text-primary hover:underline font-medium">System Status Dashboard</a> or contact technical support.
+        </div>
+
+    </main>
+
+    <!-- Page Footer -->
+    <footer class="mt-8 text-center text-xs text-on-surface-variant/70">
+        &copy; 2026 Breeze UI Architecture &bull; Universal app.css Styled Error Prototype
+    </footer>
+
+    <script>
+        // Set dynamic current time for realism
+        const timeEl = document.getElementById('error-time');
+        if (timeEl) {
+            const now = new Date();
+            timeEl.textContent = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+        }
+    </script>
+</body>
+</html>

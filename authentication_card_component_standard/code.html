@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html class="light" lang="en"><head>
 <link href="../app.css" rel="stylesheet"/>
@@ -56,7 +56,7 @@
                     </label>
 </div>
 <div class="text-sm">
-<a class="font-medium text-primary hover:text-primary-container transition-colors label-text" href="#">
+<a class="font-medium text-primary hover:text-primary-container transition-colors label-text" href="../forgot_password_card_component_standard/code.html" id="forgot-password-link">
                         Forgot password?
                     </a>
 </div>
@@ -68,7 +68,31 @@
                 </button>
 </div>
 </form>
+<!-- Back to System Hub link -->
+<div class="mt-6 pt-6 border-t border-outline-variant/30 text-center">
+<a class="inline-flex items-center justify-center gap-1.5 text-xs font-medium text-on-surface-variant hover:text-primary transition-colors" href="../module_selector/code.html" id="back-to-hub-link">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+                Back to System Hub
+            </a>
 </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const subsystem = params.get('subsystem');
+    if (subsystem) {
+        const forgotLink = document.getElementById('forgot-password-link');
+        if (forgotLink) forgotLink.href = `../forgot_password_card_component_standard/code.html?subsystem=${encodeURIComponent(subsystem)}`;
+    }
+});
+
+document.querySelector('form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const params = new URLSearchParams(window.location.search);
+    const subsystem = params.get('subsystem') || 'client-management';
+    window.location.href = `../mfa_otp_verification_card_standard/code.html?subsystem=${encodeURIComponent(subsystem)}`;
+});
+</script>
 </body></html>
 
 

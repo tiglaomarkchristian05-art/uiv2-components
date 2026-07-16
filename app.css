@@ -571,17 +571,25 @@ button, label[for^="filter-"] {
   gap: 1rem;
 }
 
-.module-card h3,
-.dashboard-card h3 {
+.module-card h3 {
   color: #f8fafc;
   font-size: 1.15rem;
   margin: 0;
 }
 
+.dashboard-card h3 {
+  color: #0f172a;
+  font-size: 1.15rem;
+  margin: 0;
+}
+
 .module-card p,
-.dashboard-card p,
 .module-list li {
   color: rgba(226, 232, 255, 0.88);
+}
+
+.dashboard-card p {
+  color: #475569;
 }
 
 .module-list {
@@ -682,9 +690,14 @@ button, label[for^="filter-"] {
 }
 
 .dashboard-action-button {
-  min-height: 3rem;
-  border-radius: 1.5rem;
-  padding: 0.95rem 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  border-radius: 999px;
+  padding: 0.65rem 1.35rem;
+  margin: 0;
 }
 
 .dashboard-chart-header {
@@ -798,10 +811,11 @@ button, label[for^="filter-"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.35rem 0.75rem;
-  border-radius: 999px;
+  padding: 4px 14px;
+  border-radius: 9999px;
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .status-pill-success {
@@ -1066,41 +1080,78 @@ button, label[for^="filter-"] {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.subsystem-card-meta .btn-view {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.85rem;
+  font-size: 0.8rem;
+  border-radius: 0.75rem;
 }
 
 .subsystem-card-count {
   color: #475569;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .subsystem-module-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.85rem;
-  margin-top: 1.25rem;
-}
-
-@media (max-width: 860px) {
-  .subsystem-module-list {
-    grid-template-columns: 1fr;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 1.25rem 0 1.5rem;
+  flex-grow: 1;
 }
 
 .module-chip {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.75rem;
+  background: #f8fafc;
+  color: #1e293b;
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.35;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.module-chip:hover {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-color: #bfdbfe;
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
+}
+
+.module-chip-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.65rem 1rem;
-  border-radius: 999px;
-  background: rgba(59, 130, 246, 0.14);
-  color: #1d4ed8;
-  font-size: 0.82rem;
-  line-height: 1.4;
-  border: 1px solid rgba(59, 130, 246, 0.16);
-  box-shadow: 0 8px 18px rgba(59, 130, 246, 0.06);
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.5rem;
+  background: rgba(59, 130, 246, 0.12);
+  color: #2563eb;
+  flex-shrink: 0;
+  font-size: 16px;
+  margin-top: -0.05rem;
+}
+
+.module-chip-text {
+  flex-grow: 1;
+  word-break: break-word;
 }
 
 .subsystem-detail {
@@ -1333,6 +1384,35 @@ button, label[for^="filter-"] {
   border-color: var(--system-border);
 }
 
+/* Status Badges - Semantic Colors & Breathing Room */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.status-badge-operational {
+  background-color: var(--layout-bg);
+  color: var(--layout-color);
+  border: 1px solid var(--layout-border);
+}
+.status-badge-maintenance {
+  background-color: var(--system-bg);
+  color: var(--system-color);
+  border: 1px solid var(--system-border);
+}
+.status-badge-archived {
+  background-color: var(--bg-surface-highest);
+  color: var(--text-muted);
+  border: 1px solid transparent;
+}
+
 .card-body {
   padding: 1.5rem;
   flex: 1;
@@ -1523,36 +1603,59 @@ button, label[for^="filter-"] {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 0.9rem;
+  gap: 0.85rem;
   width: 100%;
-  padding: 0.95rem 1.1rem;
-  background: #ffffff;
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  border-radius: 1.75rem;
-  color: #0f172a;
-  font-size: 0.95rem;
-  line-height: 1.5;
+  padding: 0.75rem 0.95rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 1.25rem;
+  color: #334155;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.4;
   text-decoration: none;
-  transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
 }
 
 .sidebar-subsystem-link:hover {
-  background: #eef2ff;
-  border-color: rgba(59, 130, 246, 0.28);
-  transform: translateX(1px);
+  background: #f1f5f9;
+  color: #0f172a;
+  border-color: transparent;
+  transform: translateX(2px);
 }
 
 .sidebar-subsystem-link-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.25rem;
+  min-width: 2.25rem;
+  max-width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  overflow: hidden;
   border-radius: 999px;
-  background: rgba(59, 130, 246, 0.12);
-  color: #2563eb;
+  background: #f1f5f9;
+  color: #475569;
   font-size: 1.15rem;
   line-height: 1;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.sidebar-subsystem-link:hover .sidebar-subsystem-link-icon {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.sidebar-subsystem-link.active {
+  background: #eef2ff;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+.sidebar-subsystem-link.active .sidebar-subsystem-link-icon {
+  background: rgba(59, 130, 246, 0.16);
+  color: #2563eb;
 }
 
 .sidebar-main-link {
@@ -1600,12 +1703,12 @@ button, label[for^="filter-"] {
 .sidebar-profile-card {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  padding: 0.95rem 1rem;
-  background: #ffffff;
-  border: 1px solid rgba(148, 163, 184, 0.12);
-  border-radius: 1.75rem;
-  box-shadow: 0 12px 20px rgba(15, 23, 42, 0.04);
+  gap: 0.65rem;
+  padding: 0.5rem 0.65rem;
+  background: #f8fafc;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 1rem;
+  box-shadow: none;
 }
 
 .sidebar-profile-footer {
@@ -1616,9 +1719,9 @@ button, label[for^="filter-"] {
   z-index: 10;
   flex-shrink: 0;
   margin-top: auto;
-  padding: 1rem 1rem 1.25rem;
-  background: #f8fbff;
-  border-top: 1px solid rgba(148, 163, 184, 0.18);
+  padding: 0.5rem 0.75rem 0.65rem;
+  background: #ffffff;
+  border-top: 1px solid rgba(148, 163, 184, 0.15);
 }
 
 /* ==========================================================================
@@ -1881,6 +1984,7 @@ button, label[for^="filter-"] {
 .text-outline { color: var(--outline); }
 .text-outline-variant { color: var(--outline-variant); }
 .text-error { color: var(--error); }
+.text-on-error { color: var(--on-error) !important; }
 .text-on-error-container { color: var(--on-error-container); }
 .text-white { color: #ffffff; }
 .text-green-600 { color: #16a34a !important; }
@@ -2169,6 +2273,9 @@ tbody tr:hover td {
   .lg\:flex { display: flex !important; }
   .lg\:inline-flex { display: inline-flex !important; }
   .lg\:hidden { display: none !important; }
+  .lg\:flex-row { flex-direction: row !important; }
+  .lg\:items-center { align-items: center !important; }
+  .lg\:justify-between { justify-content: space-between !important; }
   .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
   .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
@@ -2176,4 +2283,150 @@ tbody tr:hover td {
   .lg\:p-24 { padding: 6rem !important; }
   .lg\:px-8 { padding-left: 2rem !important; padding-right: 2rem !important; }
   .lg\:px-24 { padding-left: 6rem !important; padding-right: 6rem !important; }
+  .lg\:w-auto { width: auto !important; }
+  .lg\:border-t-0 { border-top-width: 0px !important; }
 }
+
+/* Universal Viewport & Responsive Layout Safeguards */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.max-w-full { max-width: 100% !important; }
+.min-w-0 { min-width: 0px !important; }
+.break-words { word-break: break-word !important; overflow-wrap: break-word !important; }
+.truncate { overflow: hidden !important; text-overflow: ellipsis !important; white-space: nowrap !important; }
+
+@media (max-width: 767px) {
+  .mobile-stack {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+  }
+  .mobile-full {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   GLOBAL UX MICRO-INTERACTIONS & HOVER DYNAMICS
+   ========================================================================== */
+
+/* Universal Tactile Button Hover & Active UX */
+button,
+.btn,
+a[class*="btn"] {
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.18s ease,
+              border-color 0.18s ease,
+              color 0.18s ease;
+}
+
+button:hover:not(:disabled),
+.btn:hover:not(:disabled),
+a[class*="btn"]:hover {
+  transform: translateY(-1px);
+}
+
+button:active:not(:disabled),
+.btn:active:not(:disabled),
+a[class*="btn"]:active {
+  transform: translateY(0px) scale(0.98);
+}
+
+/* Primary Button Enhanced Hover Glow */
+button[class*="bg-primary"]:hover:not(:disabled),
+.btn-primary:hover:not(:disabled) {
+  box-shadow: 0 8px 18px -4px rgba(79, 70, 229, 0.35);
+}
+
+/* Surface / Neutral Action Button Hover Lift */
+button[class*="bg-surface-container"]:hover:not(:disabled) {
+  box-shadow: 0 4px 10px -2px rgba(27, 27, 36, 0.08);
+}
+
+/* Focus Visible Accessibility Ring for all controls */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--primary) !important;
+  outline-offset: 2px !important;
+}
+
+/* Table Row Smooth Interactive Hover */
+tbody tr {
+  transition: background-color 0.15s ease;
+}
+tbody tr:hover {
+  background-color: rgba(79, 70, 229, 0.035);
+}
+
+/* Card Interactive Hover Lift & Shadow Depth */
+.dashboard-card,
+.sidebar-subsystem-card {
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.22s ease;
+}
+
+.dashboard-card:hover,
+.sidebar-subsystem-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -6px rgba(27, 27, 36, 0.09);
+  border-color: rgba(79, 70, 229, 0.25);
+}
+
+/* Disabled State UX Feedback */
+button:disabled,
+.btn:disabled {
+  cursor: not-allowed !important;
+  opacity: 0.45;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ==========================================================================
+   BUTTON COMPONENT LIBRARY EXPLICIT HOVER & ACTIVE UTILITIES
+   ========================================================================== */
+.hover\:bg-primary-container:hover {
+  background-color: var(--primary-hover) !important;
+}
+.hover\:text-on-primary-container:hover {
+  color: #ffffff !important;
+}
+.hover\:bg-surface-dim:hover {
+  background-color: #e2e8f0 !important;
+}
+.hover\:brightness-95:hover {
+  filter: brightness(0.94) !important;
+}
+.hover\:bg-error\/90:hover {
+  background-color: rgba(186, 26, 26, 0.9) !important;
+  box-shadow: 0 8px 18px -4px rgba(186, 26, 26, 0.35) !important;
+}
+.hover\:bg-primary\/10:hover {
+  background-color: rgba(79, 70, 229, 0.12) !important;
+}
+.hover\:bg-error\/10:hover {
+  background-color: rgba(186, 26, 26, 0.12) !important;
+}
+.hover\:bg-on-surface\/5:hover {
+  background-color: rgba(27, 27, 36, 0.06) !important;
+}
+
+/* Connected Button Group UX Polish */
+div[role="group"] button {
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+div[role="group"] button:hover {
+  z-index: 5;
+  transform: translateY(-1px);
+}
+div[role="group"] button:active {
+  transform: translateY(0px) scale(0.99);
+}
+
